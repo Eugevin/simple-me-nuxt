@@ -10,7 +10,7 @@
 
 <style scoped lang="scss">
 .footer {
-  border-top: .1rem solid var(--grey-color);
+  border-top: .05rem solid var(--grey-color);
   margin-top: var(--big-gap);
   padding: var(--gap) 0;
   text-align: center;

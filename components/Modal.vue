@@ -1,0 +1,39 @@
+<script setup lang="ts">
+const emit = defineEmits<{
+  close: [value: boolean]
+}>()
+</script>
+
+<template>
+  <div class="modal">
+    <div class="modal__back" @click="$emit('close', true)">←</div>
+    <slot />
+  </div>
+</template>
+
+<style scoped lang="scss">
+@use "~/assets/scss/mixins";
+
+.modal {
+  position: fixed;
+  z-index: 98;
+  top: var(--gap);
+  left: var(--gap);
+  width: calc(100% - var(--gap)* 2);
+  height: calc(100vh - 4rem);
+  overflow-x: hidden;
+  padding: calc(var(--gap) * 2) var(--gap);
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+
+  &__back {
+    position: fixed;
+    top: var(--gap);
+    left: var(--gap);
+    padding: var(--gap);
+    cursor: pointer;
+  }
+
+  @include scrollbar;
+}
+</style>

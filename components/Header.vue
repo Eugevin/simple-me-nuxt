@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { animate, scroll } from 'motion'
 
+const overflow = inject('overflow') as Ref<boolean>
+
 interface IMenuItem {
   title: string
   progress: number
@@ -26,6 +28,8 @@ const menuItems: Array<IMenuItem> = reactive([
 ])
 
 function teleportHandler(to: string) {
+  if (!overflow.value) return
+
   document.querySelector(`#${to}`)?.scrollIntoView({
     behavior: 'smooth'
   })

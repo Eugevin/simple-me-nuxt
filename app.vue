@@ -38,6 +38,8 @@ function preloadHandler() {
 </template>
 
 <style lang="scss">
+@use "~/assets/scss/mixins";
+
 main {
   position: fixed;
   top: var(--gap);
@@ -51,18 +53,7 @@ main {
   border-radius: var(--border-radius) 0 0 var(--border-radius);
   background-color: var(--black-color);
 
-  &::-webkit-scrollbar {
-    width: .1rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 .1rem var(--grey-color);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--grey-color);
-    border-radius: 100px;
-  }
+  @include scrollbar;
 }
 
 .v-enter-active,
