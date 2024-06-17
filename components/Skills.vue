@@ -47,8 +47,6 @@ const activeSkill = ref<number>(0)
 const cursorPos = reactive({ x: 0, y: 0 })
 
 function videoHandler() {
-  console.log('loaded')
-
   videoEl.value?.paused ? videoEl.value.play() : null
 }
 

@@ -68,7 +68,7 @@ function toHandler(link?: string) {
     <div class="draft__time">{{ `${data.time[0]} - ${data.time[1] ?? 'nowadays'}` }}</div>
     <h3 class="light draft__title">{{ data.title }}</h3>
     <p class="draft__description">{{ data.description }}</p>
-    <Input @click="detailsHandler(true)" type="button">Show more</Input>
+    <Input @click="detailsHandler(true)" type="button">Show details</Input>
     <Transition mode="out-in">
       <Modal @close="detailsHandler(false)" v-if="detailsActive">
         <div class="container">
@@ -82,7 +82,7 @@ function toHandler(link?: string) {
             <ul class="modal__details">
               <li v-for="detail in data.details" :key="detail">{{ detail }}</li>
             </ul>
-            <Input @click="toHandler(data.link)" class="modal__to" type="button">To project</Input>
+            <Input v-if="data.link" @click="toHandler(data.link)" class="modal__to" type="button">To project</Input>
           </div>
         </div>
       </Modal>

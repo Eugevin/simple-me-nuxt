@@ -40,24 +40,96 @@ const drafts: Array<IDraft> = [
     ],
     image: '/images/draft-travelask.webp',
     link: 'https://travelask.ru/'
-  }
+  },
+  {
+    time: ['09.20', '06.21'],
+    title: 'R52.ru',
+    description: 'R52.RU is a multi-service agency with 20 years of experience. They\'re design and provide effective presence, support and successful development of online business.',
+    details: [
+      'Layout of commercial projects.',
+      'Edits on existing sites & fixing bugs.',
+      'Working with Vue.js projects using VueX and VueRouter.'
+    ],
+    image: '/images/draft-r52.webp',
+    link: 'https://r52.ru/'
+  },
+  {
+    time: ['05.24', null],
+    title: 'Olumni Chat',
+    description: 'Olumni Chat is a UI-simple web application that allows you to connect two or more people in audio calls via WebRTC technology',
+    details: [
+      'Development of the frontend part of the application: flow control, audio processing via AudioContext, etc.',
+      'Development of backend part for interactive chat and initial negotiation.',
+      'Packaging the application in Docker and CI/CD setup.'
+    ],
+    image: '/images/draft-olumni.webp',
+    link: 'https://olumni.ru/'
+  },
+  {
+    time: ['04.21', null],
+    title: 'Show Me Some',
+    description: 'Show Me Some is my author\'s project together with my wife, where I am the main Backend and Frontend developer. The project is a visual novel with a lot of ramifications in a gloomy setting of an alternative Middle Ages.',
+    details: [
+      'Develop backend for game engine in Rust.',
+      'Writing a branched script.',
+      'Writing frontend using canvas.'
+    ],
+    image: '/images/draft-sms.webp',
+  },
+  {
+    time: ['01.18', '01.22'],
+    title: 'Freelance',
+    description: 'As a freelancer, I have worked extensively with technologies such as Vue.js, JWT, JSON handling, WebSocket, WebRTC, Express, Bootstrap and more other technologies/frameworks.',
+    details: [
+      'Engaged in the development and support of the client part of WEB-applications.',
+      'Part-time set up Nginx HTTP servers and simple servers on Linux.',
+      'Wrote small chat applications and parsers, also worked with the WebSocket API.',
+      'Participated in the development of Stores and Gaming Sites using the Vue.js framework.',
+      'Worked with Vue.js, VueRouter and VueX.'
+    ],
+    image: '/images/me.webp',
+  },
 ]
 
-const currentDrafts = ref<Array<IDraft>>([])
+const currentDrafts: Array<IDraft> = reactive([])
+const canLoadMore = ref<boolean>(true)
+const projectsEl = ref<HTMLElement>()
 
 function loadMoreHandler() {
+  const currentDraftsLength = currentDrafts.length
+  const newDrafts = drafts.slice(currentDraftsLength, currentDraftsLength + 3)
 
+  const currentContainerHeight = projectsEl.value!.clientHeight
+
+  currentDrafts.push(...newDrafts)
+
+  // BAD SHIT, BUT I'LL DO IT 💀
+  projectsEl.value!.style.overflow = 'hidden'
+  projectsEl.value!.style.height = `calc(${currentContainerHeight}px - var(--big-gap) * 2)`
+
+  // BAD SHIT X2, BUT I'LL DO IT 💀
+  setTimeout(() => {
+    projectsEl.value!.style.height = `calc(${currentContainerHeight}px + var(--big-gap) * 4`
+
+    setTimeout(() => {
+      projectsEl.value!.removeAttribute('style')
+    }, 1100)
+  })
+
+  if (currentDrafts.length === drafts.length) canLoadMore.value = false
 }
 
 onMounted(() => {
-  currentDrafts.value = drafts.slice(0, 3)
+  currentDrafts.push(...drafts.slice(0, 3))
 })
 </script>
 
 <template>
-  <div class="projects">
+  <div ref="projectsEl" class="projects">
     <Draft data-scroll v-for="draft in currentDrafts" :key="draft.title" :data="draft" />
-    <Input class="projects__load"type="button" @click="loadMoreHandler">Load more</Input>
+    <Transition mode="out-in">
+      <Input v-if="canLoadMore" class="projects__load"type="button" @click="loadMoreHandler">Load more</Input>
+    </Transition>
   </div>
 </template>
 
@@ -67,6 +139,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: var(--big-gap);
+  transition: 1s ease-in-out;
 
   &__load {
     margin-right: auto;
