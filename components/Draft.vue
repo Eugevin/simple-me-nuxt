@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { timeline, type TimelineDefinition } from 'motion';
+import { animate, stagger, type MotionKeyframesDefinition } from 'motion';
 import Input from './Input.vue';
 import Modal from './Modal.vue'
 
@@ -19,6 +19,7 @@ function detailsHandler(show: boolean) {
   const { offsetHeight: imageHeight, offsetWidth: imageWidth } = detailsImageEl.value!
 
   overflow.value = !show
+  detailsActive.value = !overflow.value
 
   if (show) {
     detailsImageEl.value!.scrollIntoView({
@@ -26,25 +27,35 @@ function detailsHandler(show: boolean) {
     })
   }
 
-  setTimeout(() => {
-    detailsActive.value = !overflow.value
+  // SPLIT TASKS & MAKE IMAGE FLYYY
 
+  setTimeout(() => {
     const requiredScale = mainHeight / imageHeight + mainWidth / imageWidth - 1
 
-    let sequence: TimelineDefinition = [
-      [detailsImageEl.value!, { transform: `scale(${requiredScale})` }],
-      [detailsImageEl.value!, { filter: 'blur(.05rem)' }]
-    ]
+    let animationParams: MotionKeyframesDefinition = { transform: `scale(${requiredScale})`, filter: 'blur(.05rem)' }
 
-    if (!show) {
-      sequence = [
-        [detailsImageEl.value!, { transform: 'scale(1)' }],
-        [detailsImageEl.value!, { filter: 'blur(0)' }]
-      ]
-    }
+    if (!show) animationParams = { transform: 'scale(1)', filter: 'blur(0)' }
 
-    timeline(sequence)
+    animate(detailsImageEl.value!, animationParams)
   }, 200)
+  
+  // SECOND TASK SPLIT & MAKE TEXT ANIMATION
+
+  setTimeout(() => {
+    if (!show) return
+
+    animate(
+      '.container > .modal > *',
+      { opacity: [0, 1], transform: ['translateY(2rem)', 'translateY(0)'] },
+      { delay: stagger(.1)
+    })
+  })
+}
+
+function toHandler(link?: string) {
+  if (!link) return
+
+  window.open(link, '_blank')
 }
 </script>
 
@@ -71,7 +82,7 @@ function detailsHandler(show: boolean) {
             <ul class="modal__details">
               <li v-for="detail in data.details" :key="detail">{{ detail }}</li>
             </ul>
-            <Input class="modal__to" type="button">Show more</Input>
+            <Input @click="toHandler(data.link)" class="modal__to" type="button">To project</Input>
           </div>
         </div>
       </Modal>

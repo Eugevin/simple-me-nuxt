@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Draft from './Draft.vue'
+import Input from './Input.vue';
 
 import { type IDraft } from '~/types'
 
@@ -13,7 +14,8 @@ const drafts: Array<IDraft> = [
       'Improved project code style, utilizing new techniques and implementing productivity approaches in frontend-server development.',
       'Writing WebAPI for multi-level data reconciliation, recalculations and working with map data.'
     ],
-    image: '/images/draft-pp.webp'
+    image: '/images/draft-pp.webp',
+    link: 'https://ppr.ru/'
   },
   {
     time: ['01.22', '06.23'],
@@ -25,7 +27,8 @@ const drafts: Array<IDraft> = [
       'Work with blockchain arhitecture, making request and logic for "backendless" applications.',
       'Error handling caused by game engine, fix bugs, adding new and refactor old functional features.'
     ],
-    image: '/images/draft-platinum.webp'
+    image: '/images/draft-platinum.webp',
+    link: 'https://sidusheroes.com/'
   },
   {
     time: ['06.21', '10.21'],
@@ -35,14 +38,26 @@ const drafts: Array<IDraft> = [
       'Migration of existing functionality from VueJS to native class EcmaScript 6+.',
       'Optimizing already written code.'
     ],
-    image: '/images/draft-travelask.webp'
+    image: '/images/draft-travelask.webp',
+    link: 'https://travelask.ru/'
   }
 ]
+
+const currentDrafts = ref<Array<IDraft>>([])
+
+function loadMoreHandler() {
+
+}
+
+onMounted(() => {
+  currentDrafts.value = drafts.slice(0, 3)
+})
 </script>
 
 <template>
   <div class="projects">
-    <Draft data-scroll v-for="draft in drafts" :key="draft.title" :data="draft" />
+    <Draft data-scroll v-for="draft in currentDrafts" :key="draft.title" :data="draft" />
+    <Input class="projects__load"type="button" @click="loadMoreHandler">Load more</Input>
   </div>
 </template>
 
@@ -52,5 +67,9 @@ const drafts: Array<IDraft> = [
   display: flex;
   flex-direction: column;
   gap: var(--big-gap);
+
+  &__load {
+    margin-right: auto;
+  }
 }
 </style>

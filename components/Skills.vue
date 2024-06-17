@@ -115,6 +115,7 @@ function presentationHandler(e: MouseEvent, targetIndex: number | null) {
     }
 
     &__title {
+      color: var(--white-color);
       font-size: 2rem;
     }
 
