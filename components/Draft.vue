@@ -36,7 +36,8 @@ function detailsHandler(show: boolean) {
 
     if (!show) animationParams = { transform: 'scale(1)', filter: 'blur(0)' }
 
-    animate(detailsImageEl.value!, animationParams)
+    // TODO: OPTIMIZATION FOR MOBILE
+    if (window.innerWidth > 600) animate(detailsImageEl.value!, animationParams)
   }, 200)
   
   // SECOND TASK SPLIT & MAKE TEXT ANIMATION
@@ -130,7 +131,9 @@ function toHandler(link?: string) {
 }
 
 .modal {
-  @include flex-col-half;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
   text-align: left;
 
   &__title, > p {

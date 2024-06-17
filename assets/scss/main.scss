@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 1vw;
+
+  @include screen-phone {
+    font-size: 3vw;
+  }
+}
+
 body {
   background: var(--white-color);
   font-size: 1rem;

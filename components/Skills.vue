@@ -51,6 +51,8 @@ function videoHandler() {
 }
 
 function presentationHandler(e: MouseEvent, targetIndex: number | null) {
+  if (window.innerWidth <= 600) return
+
   if (targetIndex === null) {
     animate('.skills__presentation', { opacity: 0 })
 

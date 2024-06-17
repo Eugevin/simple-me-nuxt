@@ -32,8 +32,22 @@ const emit = defineEmits<{
     left: var(--gap);
     padding: var(--gap);
     cursor: pointer;
+
+    @include screen-phone {
+      top: 0;
+      left: 0;
+    }
   }
 
   @include scrollbar;
+
+  @include screen-phone {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    padding: calc(var(--gap) * 2) 0;
+  }
 }
 </style>
