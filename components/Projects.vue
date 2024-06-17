@@ -109,7 +109,7 @@ function loadMoreHandler() {
 
   // BAD SHIT X2, BUT I'LL DO IT 💀
   setTimeout(() => {
-    projectsEl.value!.style.height = `calc(${currentContainerHeight}px + var(--big-gap) * 4`
+    projectsEl.value!.style.height = `calc(${currentContainerHeight}px + var(--big-gap) * 6`
 
     setTimeout(() => {
       projectsEl.value!.removeAttribute('style')
