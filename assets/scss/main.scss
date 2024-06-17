@@ -1,0 +1,60 @@
+@import 'vars';
+@import 'mixins';
+@import 'fonts';
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--white-color);
+  font-size: 1rem;
+  padding: var(--gap);
+  color: var(--grey-color);
+
+  h1 {
+    font-size: 7rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
+
+  h3 {
+    font-size: 3rem;
+  }
+
+  p {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--grey-color);
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .light {
+    font-weight: lighter;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .important {
+    color: var(--white-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--gap);
+  }
+}

@@ -1,0 +1,14 @@
+:root {
+  --black-color: #1c1c1c;
+  --grey-color: #ffffffbd;
+  --white-color: #fffffff5;
+
+  --border-radius: 1rem;
+  --gap: 2rem;
+  --big-gap: calc(var(--gap) * 5);
+
+  --transition: .5s ease;
+  --transition-long: .7s ease;
+
+  font-size: 1vw;
+}
