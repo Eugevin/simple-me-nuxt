@@ -42,6 +42,7 @@ const emit = defineEmits<{
   @include scrollbar;
 
   @include screen-phone {
+    z-index: 98;
     top: 0;
     left: 0;
     height: 100%;
