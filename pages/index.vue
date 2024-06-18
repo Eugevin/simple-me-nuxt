@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import Chat from '~/components/Chat.vue';
-import Skills from '~/components/Skills.vue';
-
-import scrollHandler from '~/utils/scrollHandler';
-
 onMounted(() => {
   scrollHandler()
 })
@@ -37,7 +32,7 @@ onMounted(() => {
       </div>
       <div class="contacts" id="contacts">
         <h2 data-scroll="zoom-in" class="light italic">Contacts?</h2>
-        <p data-scroll>Do you want me? Do you? Ahem... Well, you can find me on telegram <span class="important">@eugevin</span> and <span class="important">eugene.vinokuroff@gmail.com</span> mail.</p>
+        <p data-scroll>Do you want me? Do you? Ahem... Well, you can find me on telegram <Copy copy-value="@eugevin"><span class="important">@eugevin</span></Copy> and <Copy copy-value="eugene.vinokuroff@gmail.com"><span class="important">eugene.vinokuroff@gmail.com</span></Copy> mail.</p>
       </div>
     </div>
   </div>
