@@ -5,6 +5,11 @@ const { locale, setLocale } = useI18n()
 
 const overflow = inject('overflow') as Ref<boolean>
 
+const router = useRouter()
+const route = useRoute()
+
+const isIndexRoute = computed<boolean>(() => route.name === 'index')
+
 interface IMenuItem {
   title: string
   progress: number
@@ -37,7 +42,7 @@ function teleportHandler(to: string) {
   })
 }
 
-onMounted(() => {
+function menuScrollHandler() {
   const container = document.querySelector('main')!
 
   menuItems.forEach((item, i) => {
@@ -49,17 +54,32 @@ onMounted(() => {
       offset: ['start start', 'end start']
     })
   })
+}
+
+function backToHomepage() {
+  if (!isIndexRoute.value) {
+    router.push('/')
+
+    setTimeout(() => menuScrollHandler(), 600)
+  }
+}
+
+onMounted(() => {
+  if (isIndexRoute.value) menuScrollHandler()
 })
 </script>
 
 <template>
   <header class="header">
-    <nav class="header__navigation">
-      <ul>
-        <li @click="teleportHandler(item.title)" v-for="item in menuItems" :key="item.title" :class="`link-${item.title}`">
-          <span :style="{ '--width': `${item.progress}%`, '--content': `'${$t('header.' + item.title)}'` }">{{ $t(`header.${item.title}`) }}</span>
-        </li>
-      </ul>
+    <nav class="header__navigation" :class="{ 'header__navigation_active': !isIndexRoute }" @click="backToHomepage">
+      <Transition mode="out-in">
+        <ul v-if="isIndexRoute">
+          <li @click="teleportHandler(item.title)" v-for="item in menuItems" :key="item.title" :class="`link-${item.title}`">
+            <span :style="{ '--width': `${item.progress}%`, '--content': `'${$t('header.' + item.title)}'` }">{{ $t(`header.${item.title}`) }}</span>
+          </li>
+        </ul>
+        <span v-else>←</span>
+      </Transition>
     </nav>
     <div class="header__language" @click="setLocale(locale === 'en' ? 'ru' : 'en')">{{ locale.toUpperCase() }}</div>
   </header>
@@ -98,6 +118,10 @@ onMounted(() => {
           color: var(--white-color);
         }
       }
+    }
+
+    &_active {
+      cursor: pointer;
     }
 
     @include header-hover;

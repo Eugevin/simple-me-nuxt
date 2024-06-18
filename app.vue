@@ -45,13 +45,17 @@ main {
   top: var(--gap);
   left: var(--gap);
   width: calc(100% - var(--gap) * 2);
-  height: calc(100vh - 4rem);
+  height: calc(100vh - var(--gap) * 2);
   overflow-x: hidden;
 
   padding: var(--gap);
   box-shadow: 0 0 10rem var(--black-color);
   border-radius: var(--border-radius) 0 0 var(--border-radius);
   background-color: var(--black-color);
+
+  > div {
+    min-height: calc(100vh - var(--gap) * 2);
+  }
 
   @include scrollbar;
 
@@ -66,12 +70,16 @@ main {
 }
 
 .v-enter-active,
-.v-leave-active {
+.v-leave-active,
+.page-enter-active,
+.page-leave-active {
   transition: opacity 0.5s ease;
 }
 
 .v-enter-from,
-.v-leave-to {
+.v-leave-to,
+.page-enter-from,
+.page-leave-to {
   opacity: 0;
 }
 </style>

@@ -37,7 +37,7 @@ const chatMessages: Array<IChatMessages> = [
     </div>
     <div v-if="message.me" class="chat__me">
       <p v-html="$t(`chat[${message.me}]`)" data-scroll="slide-right" />
-      <Button v-if="message.cv" data-scroll type="button" class="cv">{{ $t('cv') }}</Button>
+      <Button v-if="message.cv" data-scroll type="button" class="cv" @click="$router.push('/cv')">{{ $t('cv') }}</Button>
     </div>
   </div>
 </template>
