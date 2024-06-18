@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 .modal {
   position: fixed;
-  z-index: 98;
+  z-index: 96;
   top: var(--gap);
   left: var(--gap);
   width: calc(100% - var(--gap)* 2);
