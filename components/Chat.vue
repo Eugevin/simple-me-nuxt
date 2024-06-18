@@ -43,6 +43,8 @@ const chatMessages: Array<IChatMessages> = [
 </template>
 
 <style scoped lang="scss">
+@use "~/assets/scss/mixins";
+
 .chat {
   display: flex;
   flex-direction: column;
@@ -50,6 +52,10 @@ const chatMessages: Array<IChatMessages> = [
 
   > div {
     width: 80%;
+
+    @include screen-phone {
+      width: 90%;
+    }
   }
 
   &__person {

@@ -60,6 +60,7 @@ main {
     left: 0;
     height: 100%;
     width: 100%;
+    padding: var(--gap) 0;
     border-radius: 0;
   }
 }

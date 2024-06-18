@@ -63,6 +63,8 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+@use "~/assets/scss/mixins";
+
 .header {
   z-index: 97;
   position: fixed;
@@ -90,6 +92,17 @@ onMounted(() => {
           color: var(--white-color);
         }
       }
+    }
+  }
+
+  @include screen-phone {
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    nav ul {
+      display: flex;
+      justify-content: center;
     }
   }
 
