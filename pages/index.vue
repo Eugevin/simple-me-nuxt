@@ -60,7 +60,7 @@ onMounted(() => {
     }
 
     &__me {
-      height: 200vh;
+      height: 150vh;
 
       div {
         background: yellow;
