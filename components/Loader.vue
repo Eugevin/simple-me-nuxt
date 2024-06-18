@@ -12,13 +12,13 @@ useHead({
 })
 
 onMounted(() => {
-  preloadHandler(false)
+  preloadHandler()
     .then(() => {
       emit('loaded', true)
     })
     .catch(() => {
       useHead({
-        title: 'Preload assets...'
+        title: 'Preload assets error!'
       })
 
       preloadError.value = true
