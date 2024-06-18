@@ -12,7 +12,7 @@ useHead({
 })
 
 onMounted(() => {
-  preloadHandler()
+  preloadHandler(window.innerWidth > 600)
     .then(() => {
       emit('loaded', true)
     })
@@ -31,11 +31,11 @@ onMounted(() => {
   <div class="loader">
     <Transition mode="out-in">
       <div v-if="!preloadError" class="container">
-        <h2 class="light loader__title">Preload assets...</h2>
+        <h2 class="light loader__title">{{ $t('preload.active') }}</h2>
         <div class="loader__inner"></div>
       </div>
       <div v-else class="container">
-        <p class="loader__message">An error occurred during the preload. Please, try again later 😿</p>
+        <p class="loader__message">{{ $t('preload.error') }}</p>
       </div>
     </Transition>
   </div>

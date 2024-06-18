@@ -1,7 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   css: [`~/assets/scss/main.scss`],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -10,5 +11,7 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
+
+  modules: ["@nuxtjs/i18n"]
 })

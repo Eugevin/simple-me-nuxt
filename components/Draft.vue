@@ -62,28 +62,28 @@ function toHandler(link?: string) {
 
 <template>
   <div class="draft">
-    <div class="draft__image">
+    <div class="draft__image" @click="detailsHandler(true)">
       <img :src="data.image" :alt="`${data.title} image`">
       <img ref="detailsImageEl" :src="data.image" :alt="`${data.title} image`">
     </div>
-    <div class="draft__time">{{ `${data.time[0]} - ${data.time[1] ?? 'nowadays'}` }}</div>
+    <div class="draft__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
     <h3 class="light draft__title">{{ data.title }}</h3>
     <p class="draft__description">{{ data.description }}</p>
-    <Input @click="detailsHandler(true)" type="button">Show details</Input>
+    <Input @click="detailsHandler(true)" type="button">{{ $t('projects.details') }}</Input>
     <Transition mode="out-in">
       <Modal @close="detailsHandler(false)" v-if="detailsActive">
         <div class="container">
           <div class="modal">
-            <div class="modal__time">{{ `${data.time[0]} - ${data.time[1] ?? 'nowadays'}` }}</div>
+            <div class="modal__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
             <h2 class="modal__title italic light">
               {{ data.title }}
             </h2>
             <div class="modal__description">{{ data.description }}</div>
-            <p>Which I participated in:</p>
+            <p>{{ $t('projects.responsibilities') }}:</p>
             <ul class="modal__details">
               <li v-for="detail in data.details" :key="detail">{{ detail }}</li>
             </ul>
-            <Input v-if="data.link" @click="toHandler(data.link)" class="modal__to" type="button">To project</Input>
+            <Input v-if="data.link" @click="toHandler(data.link)" class="modal__to" type="button">{{ $t('projects.to') }}</Input>
           </div>
         </div>
       </Modal>
@@ -110,6 +110,7 @@ function toHandler(link?: string) {
   }
 
   &__image {
+    cursor: pointer;
     position: relative;
 
     > img {

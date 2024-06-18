@@ -3,7 +3,7 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="footer__copy">&copy; All rights reserved 2024<br />Made with 💝 by <span class="important">Eugene Vinokurov</span></div>
+      <div class="footer__copy" v-html="$t('footer.top') + '<br />' + $t('footer.bottom')"></div>
     </div>
   </footer>
 </template>

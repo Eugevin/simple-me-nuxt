@@ -22,7 +22,7 @@ async function copyHandler() {
 <template>
   <div class="copy">
     <Transition mode="out-in">
-      <div class="copy__text" @click="copyHandler">{{ copied ? 'Copied!' : 'Copy' }}</div>
+      <div class="copy__text" @click="copyHandler">{{ copied ? `${$t('copied')}!` : $t('copy') }}</div>
     </Transition>
     <slot />
   </div>
@@ -41,6 +41,7 @@ async function copyHandler() {
     z-index: 1;
     padding-bottom: .5rem;
     position: absolute;
+    min-width: 15rem;
     width: 100%;
     top: 100%;
     transition: var(--transition);

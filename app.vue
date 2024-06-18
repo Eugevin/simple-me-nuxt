@@ -29,7 +29,7 @@ function preloadHandler() {
 <template>
   <Loader @loaded="preloadHandler"/>
   <Transition mode="out-in">
-    <main ref="mainEl" v-if="preloadComplete" >
+    <main ref="mainEl" v-show="preloadComplete" >
       <Header />
       <NuxtPage />
       <Footer />

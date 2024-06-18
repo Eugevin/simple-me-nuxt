@@ -9,7 +9,7 @@ onMounted(() => {
     <div class="container">
       <div class="welcome" id="welcome">
         <div class="welcome__colors">
-          <h1 data-scroll class="light italic">Eugene<br />Vinokurov</h1>
+          <h1 data-scroll class="light italic">{{ $t('me.name') }}<br />{{ $t('me.surname') }}</h1>
         </div>
         <div class="welcome__me">
           <div data-scroll="zoom-me">
@@ -20,19 +20,19 @@ onMounted(() => {
         <Chat />
       </div>
       <div class="skills" id="skills">
-        <h2 data-scroll="zoom-in" class="light italic">Skills?</h2>
+        <h2 data-scroll="zoom-in" class="light italic">{{ $t('header.skills').charAt(0).toUpperCase() + $t('header.skills').slice(1) }}?</h2>
         <Skills />
-        <p data-scroll>Yeah, that's it. <span class="important">I'm not a backend developer</span>, but sometimes (for my pet projects or important work projects) I have to use "backend stuff". That's why <span class="important">i didn't list Docker, Express and other thugs</span> here.</p>
-        <p data-scroll>*I am also <span class="important">learning Rust for myself</span>, so that someday I can write something really cool on it.</p>
+        <p data-scroll v-html="$t('skills.description')"></p>
+        <p data-scroll v-html="$t('skills.additional')"></p>
       </div>
       <div class="projects" id="projects">
-        <h2 data-scroll="zoom-in" class="light italic">Projects?</h2>
-        <p data-scroll>Some of my projects, that i can show to you, hermano:</p>
+        <h2 data-scroll="zoom-in" class="light italic">{{ $t('header.projects').charAt(0).toUpperCase() + $t('header.projects').slice(1) }}?</h2>
+        <p data-scroll v-html="$t('projects.description')"></p>
         <Projects />
       </div>
       <div class="contacts" id="contacts">
-        <h2 data-scroll="zoom-in" class="light italic">Contacts?</h2>
-        <p data-scroll>Do you want me? Do you? Ahem... Well, you can find me on telegram <Copy copy-value="@eugevin"><span class="important">@eugevin</span></Copy> and <Copy copy-value="eugene.vinokuroff@gmail.com"><span class="important">eugene.vinokuroff@gmail.com</span></Copy> mail.</p>
+        <h2 data-scroll="zoom-in" class="light italic">{{ $t('header.contacts').charAt(0).toUpperCase() + $t('header.contacts').slice(1) }}?</h2>
+        <div style="font-size: 2rem" data-scroll>{{ $t('contacts.description') }} <br />  <Copy copy-value="@eugevin"><span class="important">@eugevin</span></Copy> & <Copy copy-value="eugene.vinokuroff@gmail.com"><span class="important">eugene.vinokuroff@gmail.com</span></Copy></div>
       </div>
     </div>
   </div>

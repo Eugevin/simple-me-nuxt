@@ -24,3 +24,12 @@
     @content
   }
 }
+
+@mixin header-hover {
+  opacity: .8;
+  transition: var(--transition);
+
+  &:hover {
+    opacity: 1;
+  }
+}

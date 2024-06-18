@@ -1,11 +1,19 @@
 const filesToPreload: Array<string> = [
   'lol.webp',
   'me.webp',
+
   'skills-base.webp',
   'skills-js.webp',
   'skills-rust.webp',
   'skills-ts.webp',
   'skills-vue.webp',
+
+  'draft-olumni.webp',
+  'draft-platinum.webp',
+  'draft-pp.webp',
+  'draft-r52.webp',
+  'draft-sms.webp',
+  'draft-travelask.webp',
 
   'base.mp4',
   'js.mp4',

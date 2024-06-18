@@ -2,40 +2,34 @@
 import { animate, timeline, type TimelineDefinition } from 'motion';
 
 interface ISkill {
-  title: string
-  description: string
+  target: string
   image: string
   video: string
 }
 
 const skills: Array<ISkill> = [
   {
-    title: 'JavaScript',
-    description: 'JavaScript is a multi-paradigm programming language. Supports object-oriented, imperative and functional styles. The only language at the moment in which the front-end part of applications in the browser is written (and not only).',
+    target: 'js',
     image: '/images/skills-js.webp',
     video: '/videos/js.mp4'
   },
   {
-    title: 'TypeScript',
-    description: `TypeScript is a strongly typed programming language based on JavaScript (like a superset for JS). He is cool? Yes, he's cool. I love TypeScript - it's wonderful.`,
+    target: 'ts',
     image: '/images/skills-ts.webp',
     video: '/videos/ts.mp4'
   },
   {
-    title: 'Vue',
-    description: 'Vue.js is an open source JavaScript framework for creating user interfaces. Easily integrates into projects using other JavaScript libraries. Can function as a web framework for developing single page applications in a reactive style.',
+    target: 'vue',
     image: '/images/skills-vue.webp',
     video: '/videos/vue.mp4'
   },
   {
-    title: 'HTML5 & CSS3',
-    description: 'HTML is a markup language used to create static web pages and web applications. CSS is a style sheet language responsible for the presentation of documents written in a markup language.',
+    target: 'base',
     image: '/images/skills-base.webp',
     video: '/videos/base.mp4'
   },
   {
-    title: 'Rust',
-    description: 'Rust is another language that complements JavaScript and TypeScript that I use in my home development. This is an excellent tool that allows you to write truly productive desktop and server applications.',
+    target: 'rust',
     image: '/images/skills-rust.webp',
     video: '/videos/rust.mp4'
   },
@@ -77,11 +71,11 @@ function presentationHandler(e: MouseEvent, targetIndex: number | null) {
   <div class="skills">
     <div class="skills__box">
       <div class="skills__presentation">
-        <div class="skills__title">{{ skills[activeSkill].title }}</div>
+        <div class="skills__title">{{ $t(`skills.${skills[activeSkill].target}.title`) }}</div>
         <video ref="videoEl" @loadeddata="videoHandler" class="skills__video" :src="skills[activeSkill].video" autoplay muted loop></video>
-        <div class="skills__description">{{ skills[activeSkill].description }}</div>
+        <div class="skills__description">{{ $t(`skills.${skills[activeSkill].target}.description`) }}</div>
       </div>
-      <div @mouseout="presentationHandler($event, null)" @mousemove="presentationHandler($event, i)" class="skills__image" v-for="skill, i in skills" :key="skill.title">
+      <div @mouseout="presentationHandler($event, null)" @mousemove="presentationHandler($event, i)" class="skills__image" v-for="skill, i in skills" :key="skill.target">
         <img data-scroll :src="skill.image" alt="skills image">
       </div>
     </div>

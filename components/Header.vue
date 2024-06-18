@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { animate, scroll } from 'motion'
 
+const { locale, setLocale } = useI18n()
+
 const overflow = inject('overflow') as Ref<boolean>
 
 interface IMenuItem {
@@ -52,13 +54,14 @@ onMounted(() => {
 
 <template>
   <header class="header">
-    <nav>
+    <nav class="header__navigation">
       <ul>
         <li @click="teleportHandler(item.title)" v-for="item in menuItems" :key="item.title" :class="`link-${item.title}`">
-          <span :style="{ '--width': `${item.progress}%`, '--content': `'${item.title}'` }">{{ item.title }}</span>
+          <span :style="{ '--width': `${item.progress}%`, '--content': `'${$t('header.' + item.title)}'` }">{{ $t(`header.${item.title}`) }}</span>
         </li>
       </ul>
     </nav>
+    <div class="header__language" @click="setLocale(locale === 'en' ? 'ru' : 'en')">{{ locale.toUpperCase() }}</div>
   </header>
 </template>
 
@@ -70,10 +73,13 @@ onMounted(() => {
   position: fixed;
   top: var(--gap);
   right: var(--gap);
-  opacity: 0.8;
-  transition: var(--transition);
+  height: calc(100vh - var(--gap) * 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
 
-  nav {
+  &__navigation {
     padding: var(--gap);
 
     li {
@@ -93,21 +99,32 @@ onMounted(() => {
         }
       }
     }
+
+    @include header-hover;
+  }
+
+  &__language {
+    cursor: pointer;
+    padding: calc(var(--gap) + .5rem);
+
+    @include header-hover;
   }
 
   @include screen-phone {
+    flex-direction: row;
     top: 0;
     left: 0;
     width: 100%;
+    height: initial;
+
+    .header__language {
+      height: 100%;
+    }
 
     nav ul {
       display: flex;
       justify-content: center;
     }
-  }
-
-  &:hover {
-    opacity: 1;
   }
 }
 </style>
