@@ -33,7 +33,7 @@ export default defineI18nConfig(() => ({
         back: 'Back to Homepage'
       },
       skills: {
-        description: `Yeah, that's it. <span class="important">I'm not a Backend Developer</span>, but sometimes (for my pet projects or important work projects) I have to use "backend stuff". That's why <span class="important">i didn't list Docker, Express and other thugs</span> here.`,
+        description: `Yeah, that's it. <span class="important">I'm not a Backend Developer</span>, but sometimes (for my pet projects or important work projects) I have to use "backend stuff". That's why <span class="important">i didn't list Helmet, Go (Gin), AJV, Postman and other thugs</span> here.`,
         additional: '*I am also <span class="important">learning Rust for myself</span>, so that someday I can write something really cool on it.',
         js: {
           title: 'JavaScript',
@@ -50,6 +50,26 @@ export default defineI18nConfig(() => ({
         base: {
           title: 'HTML5 & CSS3',
           description: 'HTML is a markup language used to create static web pages and web applications. CSS is a style sheet language responsible for the presentation of documents written in a markup language.',
+        },
+        express: {
+          title: 'Express',
+          description: 'It\'s a backend JavaScript framework running on super fast V8. It allows you to write a fast api in a short time - super!'
+        },
+        mongo: {
+          title: 'MongoDB',
+          description: 'A database based on documents and collections. Very simple, has many highly abstract APIs for almost all programming languages. Top 1 database for Node applications.'
+        },
+        docker: {
+          title: 'Docker',
+          description: 'Packs your application so that it can be deployed to any environment with a single file (although I haven\'t seen projects where the project deployed normally the first time).'
+        },
+        rtc: {
+          title: 'Web RTC',
+          description: 'You want to talk to your homie about last night\'s party? I\'s this way. I know and have used SFU and P2P architectures to implement this technology.'
+        },
+        jwt: {
+          title: 'JsonWebToken',
+          description: 'Basic analog to sessions for authentication and authorization. Cool stuff. Hype. The server is spinning, the bases are running - that\'s our share.'
         },
         rust: {
           title: 'Rust',
@@ -137,7 +157,7 @@ export default defineI18nConfig(() => ({
         back: 'Назад на Главную'
       },
       skills: {
-        description: `Да. это все. <span class="important">Я не Бэкенд Разработчик</span>, но иногда (для пет проектов или важных рабочих проектов) мне нужен "бэкенд стафчик". Вот почему <span class="important">я не упомянул Docker, Express и других чебупелей</span> в списке.`,
+        description: `Да. это все. <span class="important">Я не Бэкенд Разработчик</span>, но иногда (для пет проектов или важных рабочих проектов) мне нужен "бэкенд стафчик". Вот почему <span class="important">я не упомянул Helmet, Go (Gin), AJV, Postman и других чебупелей</span> в списке.`,
         additional: '*Также я <span class="important">изучаю Rust для себя</span> и, надеюсь, когда-нибудь напишу что-то поистине кайфовое на нем.',
         js: {
           title: 'JavaScript',
@@ -154,6 +174,26 @@ export default defineI18nConfig(() => ({
         base: {
           title: 'HTML5 & CSS3',
           description: 'HTML — это язык разметки, используемый для создания статических веб-страниц и веб-приложений. CSS — это язык таблиц стилей, отвечающий за представление документов, написанных на языке разметки.'
+        },
+        express: {
+          title: 'Express',
+          description: 'Это бэкенд JavaScript фреймворк, работающий на супербыстром V8. Позволяет в сжатые сроки написать быструю апишку - кайфик!'
+        },
+        mongo: {
+          title: 'MongoDB',
+          description: 'База данных, основанная на документах и коллекциях. Очень простая, имеет много высоко абстрактных АПИ практически для всех языков программирования. Топ 1 база данных для приложений на Ноде.'
+        },
+        docker: {
+          title: 'Docker',
+          description: 'Упакует твое приложение, чтобы его можно было развертывать в любом окружении с помощью одного файлика (хотя я еще не видел проектов, где проект бы разворачивался нормально с первого раза).'
+        },
+        rtc: {
+          title: 'Web RTC',
+          description: 'Хочешь обсудить со своим корешем о вчерашней вечеринке? Это сюда. Знаю и использовал в работе SFU и P2P архитектуры для реализации этой технологии.'
+        },
+        jwt: {
+          title: 'JsonWebToken',
+          description: 'Базовый аналог сессиями для аутентификации и авторизации. Крутая штука. Хайповенькая. Сервер крутит, базы пашут - вот такая доля наша.'
         },
         rust: {
           title: 'Rust',

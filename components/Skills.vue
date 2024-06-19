@@ -29,6 +29,31 @@ const skills: Array<ISkill> = [
     video: '/videos/base.mp4'
   },
   {
+    target: 'express',
+    image: '/images/skills-express.webp',
+    video: '/videos/zero.mp4'
+  },
+  {
+    target: 'mongo',
+    image: '/images/skills-mongo.webp',
+    video: '/videos/zero.mp4'
+  },
+  {
+    target: 'docker',
+    image: '/images/skills-docker.webp',
+    video: '/videos/zero.mp4'
+  },
+  {
+    target: 'rtc',
+    image: '/images/skills-rtc.webp',
+    video: '/videos/zero.mp4'
+  },
+  {
+    target: 'jwt',
+    image: '/images/skills-jwt.webp',
+    video: '/videos/zero.mp4'
+  },
+  {
     target: 'rust',
     image: '/images/skills-rust.webp',
     video: '/videos/rust.mp4'
@@ -89,6 +114,7 @@ function presentationHandler(e: MouseEvent, targetIndex: number | null) {
       position: relative;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap
     }
 
     &__presentation {
