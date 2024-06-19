@@ -10,6 +10,9 @@ useHead({
   meta: [
     { name: 'description', content: 'I\'m frontend developer. Write code in TypeScript (JavaScript) and Vue.js 3.0.' }
   ],
+  htmlAttrs: {
+    lang: 'en'
+  }
 })
 
 const drafts: Array<IDraftTarget> = [
