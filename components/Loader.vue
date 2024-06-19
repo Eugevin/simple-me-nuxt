@@ -83,6 +83,8 @@ onMounted(async () => {
   place-content: center;
 
   h1 {
+    -webkit-text-stroke: .1rem var(--white-color);
+    color: transparent;
     display: inline-block;
     position: relative;
     text-transform: uppercase;
