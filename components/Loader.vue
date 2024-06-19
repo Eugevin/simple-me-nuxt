@@ -1,94 +1,105 @@
 <script setup lang="ts">
+import { animate, glide, stagger, type AnimationControls, type AnimationOptionsWithOverrides, type MotionKeyframesDefinition } from 'motion';
 import preloadHandler from '~/utils/preloadHandler'
 
 const emit = defineEmits<{
   loaded: [value: boolean]
 }>()
 
-const preloadError = ref<boolean>(false)
+const preloaded = ref<boolean>(false)
+const preloadProgress = ref<number>(0)
 
-useHead({
-  title: 'Preload assets...'
+interface ITextAnimation {
+  selector: string,
+  keyframes: MotionKeyframesDefinition,
+  params: AnimationOptionsWithOverrides
+}
+
+function textAnimation(show: boolean): Promise<void> {
+  const animation: ITextAnimation = {
+    selector: '.loader h1 span',
+    keyframes: show ? { transform: 'translateY(0) rotate(0)' } : { opacity: 0 },
+    params: { delay: stagger(0.05), easing: glide({ velocity: 2 }) }
+  }
+
+  return animate(animation.selector, animation.keyframes, animation.params).finished
+}
+
+function loadingAnimation(): AnimationControls {
+  const animation = animate(progress => {
+    if (!preloaded.value && preloadProgress.value >= 70) {
+      animation.pause()
+
+      return
+    }
+
+    preloadProgress.value = progress * 100
+  }, { duration: 2, easing: 'ease-in-out' })
+
+  return animation
+}
+
+watchEffect(async () => {
+  // If all files are preloaded, hide the text and give enter to user
+  if (preloadProgress.value === 100) {
+    await textAnimation(false)
+    emit('loaded', true)
+  }
 })
 
-onMounted(() => {
-  preloadHandler(window.innerWidth > 600)
-    .then(() => {
-      emit('loaded', true)
-    })
-    .catch(() => {
-      useHead({
-        title: 'Preload assets error!'
-      })
+onMounted(async () => {
+  // Initial text reveal
+  await textAnimation(true)
+  // Text preload animation
+  const initialText = loadingAnimation()
+  // Wait for files preload
+  await preloadHandler(window.innerWidth <= 600)
 
-      preloadError.value = true
-    })
+  // Preload completed, make sure that animation continue
+  preloaded.value = true
+  initialText.play()
 })
-
 </script>
 
 <template>
   <div class="loader">
-    <Transition mode="out-in">
-      <div v-if="!preloadError" class="container">
-        <h2 class="light loader__title">{{ $t('preload.active') }}</h2>
-        <div class="loader__inner"></div>
-      </div>
-      <div v-else class="container">
-        <p class="loader__message">{{ $t('preload.error') }}</p>
-      </div>
-    </Transition>
+    <div class="container__full">
+      <h1 class="bold" :style="{ '--width': `${preloadProgress}%`, '--display': `${preloadProgress === 100 ? 'none' : 'block'}`, 'color': `${preloadProgress === 100 ? 'var(--white-color)' : ''}` }">
+        <span v-for="char in 'Eugevin'" :key="char">{{ char }}</span>
+      </h1>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .loader {
+  background-color: var(--black-color);
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100%;
-  padding: var(--gap);
   text-align: center;
+  place-content: center;
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap);
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  &__title, &__message {
-    color: var(--black-color);
-  }
-
-  &__inner {
+  h1 {
+    display: inline-block;
     position: relative;
-    height: 5rem;
-    width: 5rem;
-    border-radius: 100%;
-    border: .2rem solid var(--black-color);
-    animation: loaderAnimation 1s linear infinite;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+
+    span {
+      display: inline-block;
+      transform: translateY(8rem) rotate(90deg);
+    }
 
     &::before {
-      content: "";
+      content: 'Eugevin';
+      width: var(--width);
+      overflow: hidden;
       position: absolute;
-      top: 0;
-      left: 50%;
-      height: 2rem;
-      width: 2rem;
-      transform: translateX(-50%) translateY(-1rem);
-      background-color: #ffffff;
-    }
-  }
-
-  @keyframes loaderAnimation {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
+      color: var(--white-color);
+      display: var(--display);
     }
   }
 }

@@ -30,7 +30,7 @@ const videos = filesToPreload.filter(file => {
   return file.split('.')[1] === 'mp4'
 })
 
-export default async (preloadVideo: boolean = true) => {
+export default async (withoutVideo: boolean): Promise<unknown[]> => {
   const imagesP = images.map(image => {
     return new Promise((resolve, reject) => {
       const imageEl = new Image()
@@ -46,10 +46,10 @@ export default async (preloadVideo: boolean = true) => {
       const videoEl = document.createElement('video')
       videoEl.src = `/videos/${video}`
       
-      videoEl.addEventListener('canplaythrough', resolve)      
+      videoEl.addEventListener('canplaythrough', resolve)
       videoEl.addEventListener('error', reject)      
     })
   })
 
-  return preloadVideo ? Promise.all([...imagesP, ...videosP]) : Promise.all([...imagesP])
+  return Promise.all(withoutVideo ? [...imagesP] : [...imagesP, ...videosP])
 }

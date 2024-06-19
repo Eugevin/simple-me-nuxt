@@ -5,9 +5,13 @@ import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import Loader from './components/Loader.vue';
 
-const preloadComplete = ref<boolean>(false)
+useHead({
+  title: 'Frontend Developer - Eugene Vinokurov',
+  meta: [
+    { name: 'description', content: 'I\'m frontend developer. Write code in TypeScript (JavaScript) and Vue.js 3.0.' }
+  ],
+})
 
-const overflow = ref<boolean>(true)
 const drafts: Array<IDraftTarget> = [
   {
     target: 'pp',
@@ -51,8 +55,16 @@ const drafts: Array<IDraftTarget> = [
   },
 ]
 
+const preloadComplete = ref<boolean>(false)
+
+// SHARED DATA
+
+const overflow = ref<boolean>(true)
+
 provide('overflow', overflow)
 provide('drafts', drafts)
+
+// OVERFLOW
 
 const mainEl = ref<HTMLElement>()
 
@@ -61,18 +73,12 @@ watchEffect(() => {
     mainEl.value.style.overflowY = overflow.value ? 'auto' : 'hidden'
   }
 })
-
-function preloadHandler() {
-  useHead({
-    title: 'Frontend Developer - Eugene Vinokurov // eugevin'
-  })
-
-  preloadComplete.value = true
-}
 </script>
 
 <template>
-  <Loader @loaded="preloadHandler"/>
+  <Transition mode="out-in">
+    <Loader v-if="!preloadComplete" @loaded="preloadComplete = true"/>
+  </Transition>
   <Transition mode="out-in">
     <main ref="mainEl" v-show="preloadComplete" >
       <Header />

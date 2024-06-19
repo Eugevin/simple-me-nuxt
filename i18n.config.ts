@@ -8,10 +8,6 @@ export default defineI18nConfig(() => ({
         name: 'Eugene',
         surname: 'Vinokurov'
       },
-      preload: {
-        active: 'Preload assets...',
-        error: 'An error occurred during the preload. Please, try again later 😿'
-      },
       header: {
         welcome: 'welcome',
         skills: 'skills',
@@ -115,10 +111,6 @@ export default defineI18nConfig(() => ({
       me: {
         name: 'Евгений',
         surname: 'Винокуров'
-      },
-      preload: {
-        active: 'Предзагрузка ассетов...',
-        error: 'Во время предзагрузки произошла ошибка. Пожалуйста, попробуйте зайти позже 😿'
       },
       header: {
         welcome: 'привет',

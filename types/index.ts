@@ -7,9 +7,6 @@ export interface IDraft {
   link?: string
 }
 
-export interface IDraftTarget {
+export interface IDraftTarget extends Pick<IDraft, 'time' | 'image' | 'link'> {
   target: string
-  time: [string, string | null]
-  image: string
-  link?: string
 }

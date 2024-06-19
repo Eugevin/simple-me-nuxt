@@ -68,5 +68,9 @@ body {
     max-width: 50rem;
     margin: 0 auto;
     padding: var(--gap);
+
+    &__full {
+      max-width: 100%;
+    }
   }
 }
