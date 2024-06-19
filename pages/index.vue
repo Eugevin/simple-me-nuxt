@@ -2,6 +2,10 @@
 onMounted(() => {
   scrollHandler()
 })
+
+function getSectionTitle(title: string): string {
+  return `${title.charAt(0).toUpperCase() + title.slice(1)}?`
+}
 </script>
 
 <template>
@@ -20,18 +24,18 @@ onMounted(() => {
         <Chat />
       </div>
       <div class="skills" id="skills">
-        <h2 data-scroll="zoom-in" class="light italic">{{ $t('header.skills').charAt(0).toUpperCase() + $t('header.skills').slice(1) }}?</h2>
+        <h2 data-scroll="zoom-in" class="light italic">{{ getSectionTitle($t('header.skills')) }}</h2>
         <Skills />
         <p data-scroll v-html="$t('skills.description')"></p>
         <p data-scroll v-html="$t('skills.additional')"></p>
       </div>
       <div class="projects" id="projects">
-        <h2 data-scroll="zoom-in" class="light italic">{{ $t('header.projects').charAt(0).toUpperCase() + $t('header.projects').slice(1) }}?</h2>
+        <h2 data-scroll="zoom-in" class="light italic">{{ getSectionTitle($t('header.projects')) }}</h2>
         <p data-scroll v-html="$t('projects.description')"></p>
         <Projects />
       </div>
       <div class="contacts" id="contacts">
-        <h2 data-scroll="zoom-in" class="light italic">{{ $t('header.contacts').charAt(0).toUpperCase() + $t('header.contacts').slice(1) }}?</h2>
+        <h2 data-scroll="zoom-in" class="light italic">{{ getSectionTitle($t('header.contacts')) }}</h2>
         <div style="font-size: 2rem" data-scroll>{{ $t('contacts.description') }} <br />  <Copy copy-value="@eugevin"><span class="important">@eugevin</span></Copy> & <Copy copy-value="eugene.vinokuroff@gmail.com"><span class="important">eugene.vinokuroff@gmail.com</span></Copy></div>
       </div>
     </div>

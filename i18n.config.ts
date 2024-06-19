@@ -28,7 +28,7 @@ export default defineI18nConfig(() => ({
         `- Sorry! I pinned it here. Anyway - if you further want to read on and find out how <span class="important">I'm going to flex next</span>, you're welcome - <span class="important">just scroll down</span>!`,
         '- Scroll? What a f...'
       ],
-      cv: 'Show CV',
+      downloadCV: 'Download CV',
       copy: 'Copy',
       copied: 'Copied',
       notFound: {
@@ -136,7 +136,7 @@ export default defineI18nConfig(() => ({
         `- Сорян! Прикреплю тут. В любом случае - если хочешь почитать дальше и узнать <span class="important">как я буду флексить дальше</span>, без проблем - <span class="important">просто скроль вниз</span>!`,
         '- Скролить? Что за х...'
       ],
-      cv: 'Показать Резюме',
+      downloadCV: 'Скачать Резюме',
       copy: 'Скопировать',
       copied: 'Скопировано',
       notFound: {

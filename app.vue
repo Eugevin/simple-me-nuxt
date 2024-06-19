@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { type IDraftTarget } from './types';
+
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import Loader from './components/Loader.vue';
@@ -6,8 +8,51 @@ import Loader from './components/Loader.vue';
 const preloadComplete = ref<boolean>(false)
 
 const overflow = ref<boolean>(true)
+const drafts: Array<IDraftTarget> = [
+  {
+    target: 'pp',
+    time: ['07.23', null],
+    image: '/images/draft-pp.webp',
+    link: 'https://ppr.ru/'
+  },
+  {
+    target: 'platinum',
+    time: ['01.22', '06.23'],
+    image: '/images/draft-platinum.webp',
+    link: 'https://sidusheroes.com/'
+  },
+  {
+    target: 'travelask',
+    time: ['06.21', '10.21'],
+    image: '/images/draft-travelask.webp',
+    link: 'https://travelask.ru/'
+  },
+  {
+    target: 'r52',
+    time: ['09.20', '06.21'],
+    image: '/images/draft-r52.webp',
+    link: 'https://r52.ru/'
+  },
+  {
+    target: 'olumni',
+    time: ['05.24', null],
+    image: '/images/draft-olumni.webp',
+    link: 'https://olumni.ru/'
+  },
+  {
+    target: 'sms',
+    time: ['04.21', null],
+    image: '/images/draft-sms.webp',
+  },
+  {
+    target: 'freelance',
+    time: ['01.18', '01.22'],
+    image: '/images/me.webp',
+  },
+]
 
 provide('overflow', overflow)
+provide('drafts', drafts)
 
 const mainEl = ref<HTMLElement>()
 

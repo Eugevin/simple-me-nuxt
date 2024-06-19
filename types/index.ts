@@ -6,3 +6,10 @@ export interface IDraft {
   image: string
   link?: string
 }
+
+export interface IDraftTarget {
+  target: string
+  time: [string, string | null]
+  image: string
+  link?: string
+}

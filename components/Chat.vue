@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import Button from '~/components/Input.vue';
+import type { IDraftTarget } from '~/types';
+
+const { t } = useI18n()
 
 interface IChatMessages {
   user?: number
   me?: number
   cv?: boolean
 }
+
+const drafts = inject('drafts') as Array<IDraftTarget>
 
 const chatMessages: Array<IChatMessages> = [
   {
@@ -28,6 +32,18 @@ const chatMessages: Array<IChatMessages> = [
     user: 7
   }
 ]
+
+function cvDownload() {
+  cvHandler(drafts.map(draft => {
+    return {
+      time: [draft.time[0], draft.time[1] ?? t('projects.nowadays')],
+      title: t(`projects.${draft.target}.title`),
+      description: t(`projects.${draft.target}.description`),
+      details: t(`projects.${draft.target}.details`).split('**'),
+      link: draft.link
+    }
+  }), `${t('me.name')} ${t('me.surname')}`)
+}
 </script>
 
 <template>
@@ -37,7 +53,7 @@ const chatMessages: Array<IChatMessages> = [
     </div>
     <div v-if="message.me" class="chat__me">
       <p v-html="$t(`chat[${message.me}]`)" data-scroll="slide-right" />
-      <Button v-if="message.cv" data-scroll type="button" class="cv" @click="$router.push('/cv')">{{ $t('cv') }}</Button>
+      <Input v-if="message.cv" data-scroll type="button" class="cv" @click="cvDownload">{{ $t('downloadCV') }}</Input>
     </div>
   </div>
 </template>
