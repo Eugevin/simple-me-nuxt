@@ -21,16 +21,10 @@ function detailsHandler(show: boolean) {
   overflow.value = !show
   detailsActive.value = !overflow.value
 
-  if (show) {
-    detailsImageEl.value!.scrollIntoView({
-      behavior: 'smooth'
-    })
-  }
-
-  // SPLIT TASKS & MAKE IMAGE FLYYY
+  // SCALE IMAGE TO FULLSCREEN
 
   setTimeout(() => {
-    const requiredScale = mainHeight / imageHeight + mainWidth / imageWidth - 1
+    const requiredScale = mainHeight / imageHeight + mainWidth / imageWidth - 1.2
 
     let animationParams: MotionKeyframesDefinition = { transform: `scale(${requiredScale})`, filter: 'blur(.05rem)' }
 
@@ -39,11 +33,13 @@ function detailsHandler(show: boolean) {
     // TODO: OPTIMIZATION FOR MOBILE
     if (window.innerWidth > 600) animate(detailsImageEl.value!, animationParams)
   }, 200)
-  
-  // SECOND TASK SPLIT & MAKE TEXT ANIMATION
 
+  // SCROLL IMAGE TO VIDEW AND SCALE IT TO FULLSCREEN SIZE
+  
   setTimeout(() => {
     if (!show) return
+
+    detailsImageEl.value!.scrollIntoView({ behavior: 'smooth' })
 
     animate(
       '.container > .modal > *',
@@ -67,7 +63,7 @@ function toHandler(link?: string) {
       <img ref="detailsImageEl" :src="data.image" :alt="`${data.title} image`">
     </div>
     <div class="draft__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
-    <h3 class="light draft__title">{{ data.title }}</h3>
+    <h3 class="bold draft__title">{{ data.title }}</h3>
     <p class="draft__description">{{ data.description }}</p>
     <Input @click="detailsHandler(true)" type="button">{{ $t('projects.details') }}</Input>
     <Transition mode="out-in">
@@ -75,7 +71,7 @@ function toHandler(link?: string) {
         <div class="container">
           <div class="modal">
             <div class="modal__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
-            <h2 class="modal__title italic light">
+            <h2 class="bold modal__title">
               {{ data.title }}
             </h2>
             <div class="modal__description">{{ data.description }}</div>
