@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { animate, stagger, type MotionKeyframesDefinition } from 'motion';
+import { animate, stagger } from 'motion';
 import Input from './Input.vue';
 import Modal from './Modal.vue'
 
@@ -12,34 +12,13 @@ defineProps<{
 const overflow = inject('overflow') as Ref<boolean>
 
 const detailsActive = ref<boolean>(false)
-const detailsImageEl = ref<HTMLElement>()
 
 function detailsHandler(show: boolean) {
-  const { offsetHeight: mainHeight, offsetWidth: mainWidth } = document.querySelector('main')!
-  const { offsetHeight: imageHeight, offsetWidth: imageWidth } = detailsImageEl.value!
-
   overflow.value = !show
   detailsActive.value = !overflow.value
 
-  // SCALE IMAGE TO FULLSCREEN
-
-  setTimeout(() => {
-    const requiredScale = mainHeight / imageHeight + mainWidth / imageWidth - 1.2
-
-    let animationParams: MotionKeyframesDefinition = { transform: `scale(${requiredScale})`, filter: 'blur(.05rem)' }
-
-    if (!show) animationParams = { transform: 'scale(1)', filter: 'blur(0)' }
-
-    // TODO: OPTIMIZATION FOR MOBILE
-    if (window.innerWidth > 600) animate(detailsImageEl.value!, animationParams)
-  }, 200)
-
-  // SCROLL IMAGE TO VIDEW AND SCALE IT TO FULLSCREEN SIZE
-  
   setTimeout(() => {
     if (!show) return
-
-    detailsImageEl.value!.scrollIntoView({ behavior: 'smooth' })
 
     animate(
       '.container > .modal > *',
@@ -58,10 +37,7 @@ function toHandler(link?: string) {
 
 <template>
   <div class="draft">
-    <div class="draft__image" @click="detailsHandler(true)">
-      <img :src="data.image" :alt="`${data.title} image`">
-      <img ref="detailsImageEl" :src="data.image" :alt="`${data.title} image`">
-    </div>
+    <img class="draft__image" @click="detailsHandler(true)" :src="data.image" :alt="`${data.title} image`">
     <div class="draft__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
     <h3 class="bold draft__title">{{ data.title }}</h3>
     <p class="draft__description">{{ data.description }}</p>
@@ -107,19 +83,8 @@ function toHandler(link?: string) {
 
   &__image {
     cursor: pointer;
-    position: relative;
-
-    > img {
-      width: 100%;
-      border-radius: var(--border-radius);
-
-      &:last-child {
-        z-index: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-    }
+    width: 100%;
+    border-radius: var(--border-radius);
   }
 }
 

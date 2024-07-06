@@ -5,7 +5,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="modal">
+  <div class="modal" @click.self="$emit('close', true)">
     <div class="modal__back" @click="$emit('close', true)">←</div>
     <slot />
   </div>

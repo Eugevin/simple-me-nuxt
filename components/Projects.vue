@@ -39,7 +39,7 @@ onMounted(() => currentDrafts.push(...drafts.slice(0, 3)))
 
 <template>
   <div ref="projectsEl" class="projects">
-    <Draft data-scroll v-for="draft in currentDrafts" :key="draft.target" :data="{...draft, title: $t(`projects.${draft.target}.title`), description: $t(`projects.${draft.target}.description`), details: $t(`projects.${draft.target}.details`).split('**')}" />
+    <Draft v-for="draft in currentDrafts" :key="draft.target" :data="{...draft, title: $t(`projects.${draft.target}.title`), description: $t(`projects.${draft.target}.description`), details: $t(`projects.${draft.target}.details`).split('**')}" />
     <Transition mode="out-in">
       <Input v-if="canLoadMore" class="projects__load"type="button" @click="loadMoreHandler">{{ $t('projects.more') }}</Input>
     </Transition>
