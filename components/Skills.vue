@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { animate, timeline, type TimelineDefinition } from 'motion';
+import { animate, timeline, type TimelineDefinition } from 'motion'
 
 interface ISkill {
   target: string
@@ -11,52 +11,52 @@ const skills: Array<ISkill> = [
   {
     target: 'js',
     image: '/images/skills-js.webp',
-    video: '/videos/js.mp4'
+    video: '/videos/js.mp4',
   },
   {
     target: 'ts',
     image: '/images/skills-ts.webp',
-    video: '/videos/ts.mp4'
+    video: '/videos/ts.mp4',
   },
   {
     target: 'vue',
     image: '/images/skills-vue.webp',
-    video: '/videos/vue.mp4'
+    video: '/videos/vue.mp4',
   },
   {
     target: 'base',
     image: '/images/skills-base.webp',
-    video: '/videos/base.mp4'
+    video: '/videos/base.mp4',
   },
   {
     target: 'express',
     image: '/images/skills-express.webp',
-    video: '/videos/zero.mp4'
+    video: '/videos/zero.mp4',
   },
   {
     target: 'mongo',
     image: '/images/skills-mongo.webp',
-    video: '/videos/zero.mp4'
+    video: '/videos/zero.mp4',
   },
   {
     target: 'docker',
     image: '/images/skills-docker.webp',
-    video: '/videos/zero.mp4'
+    video: '/videos/zero.mp4',
   },
   {
     target: 'rtc',
     image: '/images/skills-rtc.webp',
-    video: '/videos/zero.mp4'
+    video: '/videos/zero.mp4',
   },
   {
     target: 'jwt',
     image: '/images/skills-jwt.webp',
-    video: '/videos/zero.mp4'
+    video: '/videos/zero.mp4',
   },
   {
     target: 'rust',
     image: '/images/skills-rust.webp',
-    video: '/videos/rust.mp4'
+    video: '/videos/rust.mp4',
   },
 ]
 
@@ -82,10 +82,10 @@ function presentationHandler(e: MouseEvent, targetIndex: number | null) {
 
   cursorPos.x = e.clientX
   cursorPos.y = e.clientY
-  
+
   const sequence: TimelineDefinition = [
     ['.skills__presentation', { transform: `translate(calc(${e.clientX}px + 10vh), calc(${e.clientY}px - 20vh))` }],
-    ['.skills__presentation', { opacity: 1 }]
+    ['.skills__presentation', { opacity: 1 }],
   ]
 
   timeline(sequence, { duration: 0 })
@@ -96,12 +96,34 @@ function presentationHandler(e: MouseEvent, targetIndex: number | null) {
   <div class="skills">
     <div class="skills__box">
       <div class="skills__presentation">
-        <div class="skills__title">{{ $t(`skills.${skills[activeSkill].target}.title`) }}</div>
-        <video ref="videoEl" @loadeddata="videoHandler" class="skills__video" :src="skills[activeSkill].video" autoplay muted loop></video>
-        <div class="skills__description">{{ $t(`skills.${skills[activeSkill].target}.description`) }}</div>
+        <div class="skills__title">
+          {{ $t(`skills.${skills[activeSkill].target}.title`) }}
+        </div>
+        <video
+          ref="videoEl"
+          class="skills__video"
+          :src="skills[activeSkill].video"
+          autoplay
+          muted
+          loop
+          @loadeddata="videoHandler"
+        />
+        <div class="skills__description">
+          {{ $t(`skills.${skills[activeSkill].target}.description`) }}
+        </div>
       </div>
-      <div @mouseout="presentationHandler($event, null)" @mousemove="presentationHandler($event, i)" class="skills__image" v-for="skill, i in skills" :key="skill.target">
-        <img data-scroll :src="skill.image" alt="skills image">
+      <div
+        v-for="skill, i in skills"
+        :key="skill.target"
+        class="skills__image"
+        @mouseout="presentationHandler($event, null)"
+        @mousemove="presentationHandler($event, i)"
+      >
+        <img
+          data-scroll
+          :src="skill.image"
+          alt="skills image"
+        >
       </div>
     </div>
   </div>

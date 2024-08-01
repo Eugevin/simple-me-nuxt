@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { animate, stagger } from 'motion';
-import Input from './Input.vue';
+import { animate, stagger } from 'motion'
+import Input from './Input.vue'
 import Modal from './Modal.vue'
 
 import { type IDraft } from '~/types'
@@ -23,8 +23,8 @@ function detailsHandler(show: boolean) {
     animate(
       '.container > .modal > *',
       { opacity: [0, 1], transform: ['translateY(2rem)', 'translateY(0)'] },
-      { delay: stagger(.1)
-    })
+      { delay: stagger(0.1),
+      })
   })
 }
 
@@ -37,25 +37,60 @@ function toHandler(link?: string) {
 
 <template>
   <div class="draft">
-    <img class="draft__image" @click="detailsHandler(true)" :src="data.image" :alt="`${data.title} image`">
-    <div class="draft__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
-    <h3 class="bold draft__title">{{ data.title }}</h3>
-    <p class="draft__description">{{ data.description }}</p>
-    <Input @click="detailsHandler(true)" type="button">{{ $t('projects.details') }}</Input>
+    <img
+      class="draft__image"
+      :src="data.image"
+      :alt="`${data.title} image`"
+      @click="detailsHandler(true)"
+    >
+    <div class="draft__time">
+      {{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}
+    </div>
+    <h3 class="bold draft__title">
+      {{ data.title }}
+    </h3>
+    <p class="draft__description">
+      {{ data.description }}
+    </p>
+    <Input
+      type="button"
+      @click="detailsHandler(true)"
+    >
+      {{ $t('projects.details') }}
+    </Input>
     <Transition mode="out-in">
-      <Modal @close="detailsHandler(false)" v-if="detailsActive">
+      <Modal
+        v-if="detailsActive"
+        @close="detailsHandler(false)"
+      >
         <div class="container">
           <div class="modal">
-            <div class="modal__time">{{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}</div>
+            <div class="modal__time">
+              {{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}
+            </div>
             <h2 class="bold modal__title">
               {{ data.title }}
             </h2>
-            <div class="modal__description">{{ data.description }}</div>
+            <div class="modal__description">
+              {{ data.description }}
+            </div>
             <p>{{ $t('projects.responsibilities') }}:</p>
             <ul class="modal__details">
-              <li v-for="detail in data.details" :key="detail">{{ detail }}</li>
+              <li
+                v-for="detail in data.details"
+                :key="detail"
+              >
+                {{ detail }}
+              </li>
             </ul>
-            <Input v-if="data.link" @click="toHandler(data.link)" class="modal__to" type="button">{{ $t('projects.to') }}</Input>
+            <Input
+              v-if="data.link"
+              class="modal__to"
+              type="button"
+              @click="toHandler(data.link)"
+            >
+              {{ $t('projects.to') }}
+            </Input>
           </div>
         </div>
       </Modal>
@@ -70,7 +105,6 @@ function toHandler(link?: string) {
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-
 
   &__time, .modal__time {
     align-self: flex-start;

@@ -3,7 +3,10 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="footer__copy" v-html="$t('footer.top') + '<br />' + $t('footer.bottom')"></div>
+      <div
+        class="footer__copy"
+        v-html="$t('footer.top') + '<br />' + $t('footer.bottom')"
+      />
     </div>
   </footer>
 </template>

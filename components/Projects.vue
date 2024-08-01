@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { type IDraftTarget } from '~/types';
-
 import Draft from './Draft.vue'
-import Input from './Input.vue';
+import Input from './Input.vue'
+
+import { type IDraftTarget } from '~/types'
 
 const drafts = inject('drafts') as Array<IDraftTarget>
 
@@ -38,10 +38,24 @@ onMounted(() => currentDrafts.push(...drafts.slice(0, 3)))
 </script>
 
 <template>
-  <div ref="projectsEl" class="projects">
-    <Draft v-for="draft in currentDrafts" :key="draft.target" :data="{...draft, title: $t(`projects.${draft.target}.title`), description: $t(`projects.${draft.target}.description`), details: $t(`projects.${draft.target}.details`).split('**')}" />
+  <div
+    ref="projectsEl"
+    class="projects"
+  >
+    <Draft
+      v-for="draft in currentDrafts"
+      :key="draft.target"
+      :data="{ ...draft, title: $t(`projects.${draft.target}.title`), description: $t(`projects.${draft.target}.description`), details: $t(`projects.${draft.target}.details`).split('**') }"
+    />
     <Transition mode="out-in">
-      <Input v-if="canLoadMore" class="projects__load"type="button" @click="loadMoreHandler">{{ $t('projects.more') }}</Input>
+      <Input
+        v-if="canLoadMore"
+        class="projects__load"
+        type="button"
+        @click="loadMoreHandler"
+      >
+        {{ $t('projects.more') }}
+      </Input>
     </Transition>
   </div>
 </template>

@@ -18,27 +18,27 @@ interface IMenuItem {
 const menuItems: Array<IMenuItem> = reactive([
   {
     title: 'welcome',
-    progress: 0
+    progress: 0,
   },
   {
     title: 'skills',
-    progress: 0
+    progress: 0,
   },
   {
     title: 'projects',
-    progress: 0
+    progress: 0,
   },
   {
     title: 'contacts',
-    progress: 0
-  }
+    progress: 0,
+  },
 ])
 
 function teleportHandler(to: string) {
   if (!overflow.value) return
 
   document.querySelector(`#${to}`)?.scrollIntoView({
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
 
@@ -46,12 +46,12 @@ function menuScrollHandler() {
   const container = document.querySelector('main')!
 
   menuItems.forEach((item, i) => {
-    scroll(animate(progress => {
+    scroll(animate((progress) => {
       menuItems[i].progress = Number((progress * 100).toFixed(0))
     }), {
       container,
       target: document.querySelector(`#${item.title}`)!,
-      offset: ['start start', 'end start']
+      offset: ['start start', 'end start'],
     })
   })
 }
@@ -71,17 +71,31 @@ onMounted(() => {
 
 <template>
   <header class="header">
-    <nav class="header__navigation" :class="{ 'header__navigation_active': !isIndexRoute }" @click="backToHomepage">
+    <nav
+      class="header__navigation"
+      :class="{ header__navigation_active: !isIndexRoute }"
+      @click="backToHomepage"
+    >
       <Transition mode="out-in">
         <ul v-if="isIndexRoute">
-          <li @click="teleportHandler(item.title)" v-for="item in menuItems" :key="item.title" :class="`link-${item.title}`">
+          <li
+            v-for="item in menuItems"
+            :key="item.title"
+            :class="`link-${item.title}`"
+            @click="teleportHandler(item.title)"
+          >
             <span :style="{ '--width': `${item.progress}%`, '--content': `'${$t('header.' + item.title)}'` }">{{ $t(`header.${item.title}`) }}</span>
           </li>
         </ul>
         <span v-else>←</span>
       </Transition>
     </nav>
-    <div class="header__language" @click="setLocale(locale === 'en' ? 'ru' : 'en')">{{ locale.toUpperCase() }}</div>
+    <div
+      class="header__language"
+      @click="setLocale(locale === 'en' ? 'ru' : 'en')"
+    >
+      {{ locale.toUpperCase() }}
+    </div>
   </header>
 </template>
 

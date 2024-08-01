@@ -22,16 +22,16 @@ const filesToPreload: Array<string> = [
   'vue.mp4',
 ]
 
-const images = filesToPreload.filter(file => {
+const images = filesToPreload.filter((file) => {
   return file.split('.')[1] === 'webp'
 })
 
-const videos = filesToPreload.filter(file => {
+const videos = filesToPreload.filter((file) => {
   return file.split('.')[1] === 'mp4'
 })
 
 export default async (withoutVideo: boolean): Promise<unknown[]> => {
-  const imagesP = images.map(image => {
+  const imagesP = images.map((image) => {
     return new Promise((resolve, reject) => {
       const imageEl = new Image()
       imageEl.src = `/images/${image}`
@@ -40,14 +40,14 @@ export default async (withoutVideo: boolean): Promise<unknown[]> => {
       imageEl.addEventListener('error', reject)
     })
   })
-  
-  const videosP = videos.map(video => {
+
+  const videosP = videos.map((video) => {
     return new Promise((resolve, reject) => {
       const videoEl = document.createElement('video')
       videoEl.src = `/videos/${video}`
-      
+
       videoEl.addEventListener('canplaythrough', resolve)
-      videoEl.addEventListener('error', reject)      
+      videoEl.addEventListener('error', reject)
     })
   })
 

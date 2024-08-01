@@ -9,32 +9,89 @@ function getSectionTitle(title: string): string {
 <template>
   <div class="index-page light">
     <div class="container">
-      <div class="welcome" id="welcome">
+      <div
+        id="welcome"
+        class="welcome"
+      >
         <div class="welcome__colors">
-          <h1 data-scroll class="light italic">{{ $t('me.name') }}<br />{{ $t('me.surname') }}</h1>
+          <h1
+            data-scroll
+            class="light italic"
+          >
+            {{ $t('me.name') }}<br>{{ $t('me.surname') }}
+          </h1>
         </div>
         <div class="welcome__me">
           <div data-scroll="zoom-me">
-            <img src="/images/me.webp" alt="My photo">
-            <img data-scroll="show-me" src="/images/lol.webp" alt="My second photo">
+            <img
+              src="/images/me.webp"
+              alt="My photo"
+            >
+            <img
+              data-scroll="show-me"
+              src="/images/lol.webp"
+              alt="My second photo"
+            >
           </div>
         </div>
         <Chat />
       </div>
-      <div class="skills" id="skills">
-        <h2 data-scroll="zoom-in" class="light italic">{{ getSectionTitle($t('header.skills')) }}</h2>
+      <div
+        id="skills"
+        class="skills"
+      >
+        <h2
+          data-scroll="zoom-in"
+          class="light italic"
+        >
+          {{ getSectionTitle($t('header.skills')) }}
+        </h2>
         <Skills />
-        <p data-scroll v-html="$t('skills.description')"></p>
-        <p data-scroll v-html="$t('skills.additional')"></p>
+        <p
+          data-scroll
+          v-html="$t('skills.description')"
+        />
+        <p
+          data-scroll
+          v-html="$t('skills.additional')"
+        />
       </div>
-      <div class="projects" id="projects">
-        <h2 data-scroll="zoom-in" class="light italic">{{ getSectionTitle($t('header.projects')) }}</h2>
-        <p data-scroll v-html="$t('projects.description')"></p>
+      <div
+        id="projects"
+        class="projects"
+      >
+        <h2
+          data-scroll="zoom-in"
+          class="light italic"
+        >
+          {{ getSectionTitle($t('header.projects')) }}
+        </h2>
+        <p
+          data-scroll
+          v-html="$t('projects.description')"
+        />
         <Projects />
       </div>
-      <div class="contacts" id="contacts">
-        <h2 data-scroll="zoom-in" class="light italic">{{ getSectionTitle($t('header.contacts')) }}</h2>
-        <div style="font-size: 2rem" data-scroll>{{ $t('contacts.description') }} <br />  <Copy copy-value="@eugevin"><span class="important">@eugevin</span></Copy> & <Copy copy-value="eugene.vinokuroff@gmail.com"><span class="important">eugene.vinokuroff@gmail.com</span></Copy></div>
+      <div
+        id="contacts"
+        class="contacts"
+      >
+        <h2
+          data-scroll="zoom-in"
+          class="light italic"
+        >
+          {{ getSectionTitle($t('header.contacts')) }}
+        </h2>
+        <div
+          style="font-size: 2rem"
+          data-scroll
+        >
+          {{ $t('contacts.description') }} <br>  <Copy copy-value="@eugevin">
+            <span class="important">@eugevin</span>
+          </Copy> & <Copy copy-value="eugene.vinokuroff@gmail.com">
+            <span class="important">eugene.vinokuroff@gmail.com</span>
+          </Copy>
+        </div>
       </div>
     </div>
   </div>

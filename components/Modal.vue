@@ -1,12 +1,20 @@
 <script setup lang="ts">
-const emit = defineEmits<{
+defineEmits<{
   close: [value: boolean]
 }>()
 </script>
 
 <template>
-  <div class="modal" @click.self="$emit('close', true)">
-    <div class="modal__back" @click="$emit('close', true)">←</div>
+  <div
+    class="modal"
+    @click.self="$emit('close', true)"
+  >
+    <div
+      class="modal__back"
+      @click="$emit('close', true)"
+    >
+      ←
+    </div>
     <slot />
   </div>
 </template>

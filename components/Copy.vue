@@ -14,16 +14,19 @@ async function copyHandler() {
   clearTimeout(copiedTimeout)
 
   copiedTimeout = setTimeout(() => {
-    copied.value = false    
+    copied.value = false
   }, 1000)
 }
 </script>
 
 <template>
   <div class="copy">
-    <Transition mode="out-in">
-      <div class="copy__text" @click="copyHandler">{{ copied ? `${$t('copied')}!` : $t('copy') }}</div>
-    </Transition>
+    <div
+      class="copy__text"
+      @click="copyHandler"
+    >
+      {{ copied ? `${$t('copied')}!` : $t('copy') }}
+    </div>
     <slot />
   </div>
 </template>

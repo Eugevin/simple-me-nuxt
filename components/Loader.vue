@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { animate, glide, stagger, type AnimationControls, type AnimationOptionsWithOverrides, type MotionKeyframesDefinition } from 'motion';
+import { animate, glide, stagger, type AnimationControls, type AnimationOptionsWithOverrides, type MotionKeyframesDefinition } from 'motion'
 import preloadHandler from '~/utils/preloadHandler'
 
 const emit = defineEmits<{
@@ -10,8 +10,8 @@ const preloaded = ref<boolean>(false)
 const preloadProgress = ref<number>(0)
 
 interface ITextAnimation {
-  selector: string,
-  keyframes: MotionKeyframesDefinition,
+  selector: string
+  keyframes: MotionKeyframesDefinition
   params: AnimationOptionsWithOverrides
 }
 
@@ -19,14 +19,14 @@ function textAnimation(show: boolean): Promise<void> {
   const animation: ITextAnimation = {
     selector: '.loader h1 span',
     keyframes: show ? { transform: 'translateY(0) rotate(0)' } : { opacity: 0 },
-    params: { delay: stagger(0.05), easing: glide({ velocity: 2 }) }
+    params: { delay: stagger(0.05), easing: glide({ velocity: 2 }) },
   }
 
   return animate(animation.selector, animation.keyframes, animation.params).finished
 }
 
 function loadingAnimation(): AnimationControls {
-  const animation = animate(progress => {
+  const animation = animate((progress) => {
     if (!preloaded.value && preloadProgress.value >= 70) {
       animation.pause()
 
@@ -64,8 +64,14 @@ onMounted(async () => {
 <template>
   <div class="loader">
     <div class="container__full">
-      <h1 class="bold" :style="{ '--width': `${preloadProgress}%`, '--display': `${preloadProgress === 100 ? 'none' : 'block'}`, 'color': `${preloadProgress === 100 ? 'var(--white-color)' : ''}` }">
-        <span v-for="char in 'Eugevin'" :key="char">{{ char }}</span>
+      <h1
+        class="bold"
+        :style="{ '--width': `${preloadProgress}%`, '--display': `${preloadProgress === 100 ? 'none' : 'block'}`, 'color': `${preloadProgress === 100 ? 'var(--white-color)' : ''}` }"
+      >
+        <span
+          v-for="char in 'Eugevin'"
+          :key="char"
+        >{{ char }}</span>
       </h1>
     </div>
   </div>

@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 const handleError = () => clearError({ redirect: '/' })
 </script>
@@ -6,10 +5,18 @@ const handleError = () => clearError({ redirect: '/' })
 <template>
   <main>
     <div class="container">
-      <img src="/images/fire-code.webp" alt="error image">
+      <img
+        src="/images/fire-code.webp"
+        alt="error image"
+      >
       <h2>{{ $t('notFound.title') }}</h2>
       <p>{{ $t('notFound.description') }}</p>
-      <Input type="button" @click="handleError">{{ $t('notFound.back') }}</Input>
+      <Input
+        type="button"
+        @click="handleError"
+      >
+        {{ $t('notFound.back') }}
+      </Input>
     </div>
   </main>
 </template>

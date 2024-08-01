@@ -1,5 +1,5 @@
-import { type IDraft } from '~/types';
-import jsPDF from 'jspdf';
+import jsPDF from 'jspdf'
+import { type IDraft } from '~/types'
 
 type IDrafts = Omit<IDraft, 'image'>
 
@@ -7,7 +7,7 @@ export default (drafts: Array<IDrafts>, creds: string) => {
   const pdf = new jsPDF()
 
   const [titleSize, headingSize, textSize] = [20, 14, 10]
-  
+
   pdf
     .setFontSize(textSize)
     .text('Frontend Developer', 10, 10)
@@ -28,9 +28,9 @@ export default (drafts: Array<IDrafts>, creds: string) => {
 
     draft.details.map((detail, i) => {
       const detailYPos = startYPos + 10 + ((i + 1) * 5)
-      
+
       pdf.text(`${detail}`, 15, detailYPos)
     })
   })
-  pdf.save(`${creds}.pdf`);
+  pdf.save(`${creds}.pdf`)
 }

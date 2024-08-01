@@ -6,9 +6,12 @@ defineProps<{
 
 <template>
   <button v-if="type === 'button'">
-    <slot />  
+    <slot />
   </button>
-  <input v-else type="text">
+  <input
+    v-else
+    type="text"
+  >
 </template>
 
 <style scoped lang="scss">
