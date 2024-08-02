@@ -14,24 +14,10 @@ const filesToPreload: Array<string> = [
   'draft-r52.webp',
   'draft-sms.webp',
   'draft-travelask.webp',
-
-  'base.mp4',
-  'js.mp4',
-  'rust.mp4',
-  'ts.mp4',
-  'vue.mp4',
 ]
 
-const images = filesToPreload.filter((file) => {
-  return file.split('.')[1] === 'webp'
-})
-
-const videos = filesToPreload.filter((file) => {
-  return file.split('.')[1] === 'mp4'
-})
-
-export default async (withoutVideo: boolean): Promise<unknown[]> => {
-  const imagesP = images.map((image) => {
+export default async (): Promise<unknown[]> => {
+  const imagesP = filesToPreload.map((image) => {
     return new Promise((resolve, reject) => {
       const imageEl = new Image()
       imageEl.src = `/images/${image}`
@@ -41,15 +27,5 @@ export default async (withoutVideo: boolean): Promise<unknown[]> => {
     })
   })
 
-  const videosP = videos.map((video) => {
-    return new Promise((resolve, reject) => {
-      const videoEl = document.createElement('video')
-      videoEl.src = `/videos/${video}`
-
-      videoEl.addEventListener('canplaythrough', resolve)
-      videoEl.addEventListener('error', reject)
-    })
-  })
-
-  return Promise.all(withoutVideo ? [...imagesP] : [...imagesP, ...videosP])
+  return Promise.all([...imagesP])
 }

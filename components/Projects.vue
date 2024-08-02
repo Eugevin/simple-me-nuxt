@@ -9,27 +9,25 @@ const drafts = inject('drafts') as Array<IDraftTarget>
 const currentDrafts: Array<IDraftTarget> = reactive([])
 const canLoadMore = ref<boolean>(true)
 const projectsEl = ref<HTMLElement>()
+const projectsElStyles = reactive({
+  maxHeight: '100%',
+  transition: 'none',
+})
 
-function loadMoreHandler() {
+async function loadMoreHandler() {
   const currentDraftsLength = currentDrafts.length
   const newDrafts = drafts.slice(currentDraftsLength, currentDraftsLength + 3)
 
-  const currentContainerHeight = projectsEl.value!.clientHeight
+  projectsElStyles.transition = 'none'
+  projectsElStyles.maxHeight = `${projectsEl.value?.offsetHeight}px`
+
+  // drop task in main thread and wait
+  await wait(0)
 
   currentDrafts.push(...newDrafts)
 
-  // BAD SHIT, BUT I'LL DO IT 💀
-  projectsEl.value!.style.overflow = 'hidden'
-  projectsEl.value!.style.height = `calc(${currentContainerHeight}px - var(--big-gap) * 2)`
-
-  // BAD SHIT X2, BUT I'LL DO IT 💀
-  setTimeout(() => {
-    projectsEl.value!.style.height = `calc(${currentContainerHeight}px + var(--big-gap) * 6`
-
-    setTimeout(() => {
-      projectsEl.value!.removeAttribute('style')
-    }, 1100)
-  })
+  projectsElStyles.transition = '1s ease-in-out'
+  projectsElStyles.maxHeight = `${Number(projectsElStyles.maxHeight.split('px')[0]) + Number(projectsElStyles.maxHeight.split('px')[0]) / currentDraftsLength * newDrafts.length}px`
 
   if (currentDrafts.length === drafts.length) canLoadMore.value = false
 }
@@ -41,23 +39,24 @@ onMounted(() => currentDrafts.push(...drafts.slice(0, 3)))
   <div
     ref="projectsEl"
     class="projects"
+    :style="projectsElStyles"
   >
     <Draft
       v-for="draft in currentDrafts"
       :key="draft.target"
       :data="{ ...draft, title: $t(`projects.${draft.target}.title`), description: $t(`projects.${draft.target}.description`), details: $t(`projects.${draft.target}.details`).split('**') }"
     />
-    <Transition mode="out-in">
-      <Input
-        v-if="canLoadMore"
-        class="projects__load"
-        type="button"
-        @click="loadMoreHandler"
-      >
-        {{ $t('projects.more') }}
-      </Input>
-    </Transition>
   </div>
+  <Transition mode="out-in">
+    <Input
+      v-if="canLoadMore"
+      class="projects__load"
+      type="button"
+      @click="loadMoreHandler"
+    >
+      {{ $t('projects.more') }}
+    </Input>
+  </Transition>
 </template>
 
 <style scoped lang="scss">
@@ -66,10 +65,7 @@ onMounted(() => currentDrafts.push(...drafts.slice(0, 3)))
   display: flex;
   flex-direction: column;
   gap: var(--big-gap);
-  transition: 1s ease-in-out;
-
-  &__load {
-    margin-right: auto;
-  }
+  height: 100%;
+  overflow: hidden;
 }
 </style>

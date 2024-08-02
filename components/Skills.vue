@@ -1,176 +1,100 @@
 <script setup lang="ts">
-import { animate, timeline, type TimelineDefinition } from 'motion'
-
 interface ISkill {
   target: string
   image: string
-  video: string
 }
 
 const skills: Array<ISkill> = [
   {
     target: 'js',
     image: '/images/skills-js.webp',
-    video: '/videos/js.mp4',
   },
   {
     target: 'ts',
     image: '/images/skills-ts.webp',
-    video: '/videos/ts.mp4',
   },
   {
     target: 'vue',
     image: '/images/skills-vue.webp',
-    video: '/videos/vue.mp4',
   },
   {
     target: 'base',
     image: '/images/skills-base.webp',
-    video: '/videos/base.mp4',
   },
   {
     target: 'express',
     image: '/images/skills-express.webp',
-    video: '/videos/zero.mp4',
   },
   {
     target: 'mongo',
     image: '/images/skills-mongo.webp',
-    video: '/videos/zero.mp4',
   },
   {
     target: 'docker',
     image: '/images/skills-docker.webp',
-    video: '/videos/zero.mp4',
   },
   {
     target: 'rtc',
     image: '/images/skills-rtc.webp',
-    video: '/videos/zero.mp4',
   },
   {
     target: 'jwt',
     image: '/images/skills-jwt.webp',
-    video: '/videos/zero.mp4',
   },
   {
     target: 'rust',
     image: '/images/skills-rust.webp',
-    video: '/videos/rust.mp4',
   },
 ]
-
-const videoEl = ref<HTMLVideoElement>()
-
-const activeSkill = ref<number>(0)
-const cursorPos = reactive({ x: 0, y: 0 })
-
-function videoHandler() {
-  videoEl.value?.paused ? videoEl.value.play() : null
-}
-
-function presentationHandler(e: MouseEvent, targetIndex: number | null) {
-  if (window.innerWidth <= 600) return
-
-  if (targetIndex === null) {
-    animate('.skills__presentation', { opacity: 0 })
-
-    return
-  }
-
-  activeSkill.value = targetIndex
-
-  cursorPos.x = e.clientX
-  cursorPos.y = e.clientY
-
-  const sequence: TimelineDefinition = [
-    ['.skills__presentation', { transform: `translate(calc(${e.clientX}px + 10vh), calc(${e.clientY}px - 20vh))` }],
-    ['.skills__presentation', { opacity: 1 }],
-  ]
-
-  timeline(sequence, { duration: 0 })
-}
 </script>
 
 <template>
   <div class="skills">
-    <div class="skills__box">
-      <div class="skills__presentation">
-        <div class="skills__title">
-          {{ $t(`skills.${skills[activeSkill].target}.title`) }}
-        </div>
-        <video
-          ref="videoEl"
-          class="skills__video"
-          :src="skills[activeSkill].video"
-          autoplay
-          muted
-          loop
-          @loadeddata="videoHandler"
-        />
-        <div class="skills__description">
-          {{ $t(`skills.${skills[activeSkill].target}.description`) }}
-        </div>
-      </div>
-      <div
-        v-for="skill, i in skills"
-        :key="skill.target"
-        class="skills__image"
-        @mouseout="presentationHandler($event, null)"
-        @mousemove="presentationHandler($event, i)"
-      >
+    <Card
+      v-for="skill in skills"
+      :key="skill.target"
+      class="skill"
+      data-scroll
+    >
+      <p class="skill__title">
+        {{ $t(`skills.${skill.target}`) }}
+      </p>
+      <div class="skill__image">
         <img
-          data-scroll
           :src="skill.image"
           alt="skills image"
         >
       </div>
-    </div>
+    </Card>
   </div>
 </template>
 
 <style scoped lang="scss">
 .skills {
-  .skills {
-    &__box {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap
-    }
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 
-    &__presentation {
-      --size: 20rem;
-
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap);
-      border-radius: var(--border-radius);
-      pointer-events: none;
-      opacity: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-
-      max-width: var(--size);
-    }
+  .skill {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
     &__title {
-      color: var(--white-color);
-      font-size: 2rem;
-    }
-
-    &__video {
-      margin: 0 auto;
-      height: calc(var(--size) * (9 / 16));
-      width: 100%;
-      position: relative;
+      pointer-events: none;
+      white-space: nowrap;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) translateY(-3rem);
+      opacity: 0;
+      transition: var(--transition);
     }
 
     &__image {
       padding: 1rem;
-      cursor: pointer;
 
       img {
         pointer-events: none;
@@ -178,6 +102,13 @@ function presentationHandler(e: MouseEvent, targetIndex: number | null) {
 
         height: var(--image-size);
         width: var(--image-size);
+      }
+    }
+
+    &:hover {
+      .skill__title {
+        transform: translateX(-50%) translateY(-5rem);
+        opacity: 1;
       }
     }
   }

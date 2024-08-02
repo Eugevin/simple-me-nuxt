@@ -24,11 +24,6 @@ button {
   cursor: pointer;
   padding: 1rem 2rem;
   font-size: 2rem;
-  will-change: transform;
   transition: var(--transition);
-
-  &:hover {
-    transform: scale(1.1);
-  }
 }
 </style>

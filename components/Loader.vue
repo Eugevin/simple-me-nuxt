@@ -53,7 +53,7 @@ onMounted(async () => {
   // Text preload animation
   const initialText = loadingAnimation()
   // Wait for files preload
-  await preloadHandler(window.innerWidth <= 600)
+  await preloadHandler()
 
   // Preload completed, make sure that animation continue
   preloaded.value = true

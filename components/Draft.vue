@@ -37,27 +37,19 @@ function toHandler(link?: string) {
 
 <template>
   <div class="draft">
-    <img
-      class="draft__image"
-      :src="data.image"
-      :alt="`${data.title} image`"
-      @click="detailsHandler(true)"
-    >
-    <div class="draft__time">
-      {{ `${data.time[0]} - ${data.time[1] ?? $t('projects.nowadays')}` }}
-    </div>
     <h3 class="bold draft__title">
       {{ data.title }}
     </h3>
-    <p class="draft__description">
-      {{ data.description }}
-    </p>
-    <Input
-      type="button"
+    <div
+      class="draft__image"
       @click="detailsHandler(true)"
     >
-      {{ $t('projects.details') }}
-    </Input>
+      <img
+        :src="data.image"
+        :alt="`${data.title} image`"
+      >
+      <p>{{ data.description }}</p>
+    </div>
     <Transition mode="out-in">
       <Modal
         v-if="detailsActive"
@@ -111,14 +103,46 @@ function toHandler(link?: string) {
     opacity: .5;
   }
 
-  &__title {
-    color: var(--white-color);
-  }
-
   &__image {
+    position: relative;
     cursor: pointer;
     width: 100%;
     border-radius: var(--border-radius);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+
+    p {
+      padding: var(--gap);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      transform: scale(1.1);
+      opacity: 0;
+      transition: var(--transition);
+      will-change: transform;
+    }
+
+    &:hover {
+      p {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      @include screen-phone {
+        p {
+          opacity: 0;
+        }
+      }
+    }
   }
 }
 
