@@ -50,10 +50,10 @@ const skills: Array<ISkill> = [
 
 <template>
   <div class="skills">
-    <Card
+    <div
       v-for="skill in skills"
       :key="skill.target"
-      class="skill"
+      class="box skill"
       data-scroll
     >
       <p class="skill__title">
@@ -65,7 +65,7 @@ const skills: Array<ISkill> = [
           alt="skills image"
         >
       </div>
-    </Card>
+    </div>
   </div>
 </template>
 

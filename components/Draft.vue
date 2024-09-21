@@ -33,14 +33,21 @@ function toHandler(link?: string) {
 
   window.open(link, '_blank')
 }
+
+// TODO: CRINGE? YUP, IT IS!
+onMounted(scrollHandler)
 </script>
 
 <template>
   <div class="draft">
-    <h3 class="bold draft__title">
+    <h3
+      data-scroll
+      class="bold draft__title"
+    >
       {{ data.title }}
     </h3>
     <div
+      data-scroll
       class="draft__image"
       @click="detailsHandler(true)"
     >
@@ -139,7 +146,7 @@ function toHandler(link?: string) {
 
       @include screen-phone {
         p {
-          opacity: 0;
+          display: none;
         }
       }
     }

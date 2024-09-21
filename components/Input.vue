@@ -18,12 +18,14 @@ defineProps<{
 button {
   font-family: Raleway, Helvetica, sans-serif;
   font-weight: bold;
-  background: var(--white-color);
-  color: var(--black-color);
-  border-radius: 100px;
   cursor: pointer;
-  padding: 1rem 2rem;
   font-size: 2rem;
+  outline: none;
+  border-radius: var(--border-radius);
+  background-color: var(--white-color);
+  color: var(--black-color);
+  padding: 1rem;
+  border: .1rem solid var(--white-color);
   transition: var(--transition);
 }
 </style>
