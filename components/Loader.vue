@@ -79,6 +79,7 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .loader {
+  z-index: 99;
   background-color: var(--black-color);
   position: fixed;
   top: 0;

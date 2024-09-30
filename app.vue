@@ -79,22 +79,19 @@ watchEffect(() => {
 </script>
 
 <template>
-  <Transition mode="out-in">
+  <Transition>
     <Loader
       v-if="!preloadComplete"
       @loaded="preloadComplete = true"
     />
   </Transition>
-  <Transition mode="out-in">
-    <main
-      v-show="preloadComplete"
-      ref="mainEl"
-    >
-      <Header />
-      <NuxtPage />
-      <Footer />
-    </main>
-  </Transition>
+  <main
+    ref="mainEl"
+  >
+    <Header />
+    <NuxtPage />
+    <Footer />
+  </main>
 </template>
 
 <style lang="scss">
