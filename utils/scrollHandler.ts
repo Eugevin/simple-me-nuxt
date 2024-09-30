@@ -11,7 +11,7 @@ export default () => {
 
     const animation: IAnimation = {
       keyframes: {
-        opacity: [0, 1],
+        opacity: [0.1, 1],
       },
       params: {
         container: document.querySelector('main')!,
