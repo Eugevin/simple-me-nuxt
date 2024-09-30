@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const handleError = () => clearError({ redirect: '/' })
+const back = () => navigateTo('/', {
+  external: true
+})
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const handleError = () => clearError({ redirect: '/' })
       <p>{{ $t('notFound.description') }}</p>
       <Input
         type="button"
-        @click="handleError"
+        @click="back"
       >
         {{ $t('notFound.back') }}
       </Input>
