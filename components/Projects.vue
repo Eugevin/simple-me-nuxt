@@ -26,6 +26,10 @@ async function loadMoreHandler() {
 
   currentDrafts.push(...newDrafts)
 
+  // wait before shit comes through
+
+  await wait(0)
+
   projectsElStyles.transition = '1s ease-in-out'
   projectsElStyles.maxHeight = `${Number(projectsElStyles.maxHeight.split('px')[0]) + Number(projectsElStyles.maxHeight.split('px')[0]) / currentDraftsLength * newDrafts.length}px`
 

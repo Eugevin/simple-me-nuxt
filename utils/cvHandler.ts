@@ -3,6 +3,8 @@ import { type IDraft } from '~/types'
 
 type IDrafts = Omit<IDraft, 'image'>
 
+// TODO: Unusable for now :c
+
 export default (drafts: Array<IDrafts>, creds: string) => {
   const pdf = new jsPDF()
 
