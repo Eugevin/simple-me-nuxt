@@ -98,8 +98,6 @@ onMounted(scrollHandler)
 </template>
 
 <style scoped lang="scss">
-@use "~/assets/scss/mixins";
-
 .draft {
   display: flex;
   flex-direction: column;

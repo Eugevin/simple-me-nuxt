@@ -20,8 +20,6 @@ defineEmits<{
 </template>
 
 <style scoped lang="scss">
-@use "~/assets/scss/mixins";
-
 .modal {
   position: fixed;
   z-index: 96;

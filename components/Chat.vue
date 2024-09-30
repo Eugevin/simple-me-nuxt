@@ -83,8 +83,6 @@ function cvDownload() {
 </template>
 
 <style scoped lang="scss">
-@use "~/assets/scss/mixins";
-
 .chat {
   display: flex;
   flex-direction: column;

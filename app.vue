@@ -95,8 +95,6 @@ watchEffect(() => {
 </template>
 
 <style lang="scss">
-@use "~/assets/scss/mixins";
-
 main {
   position: fixed;
   top: var(--gap);
