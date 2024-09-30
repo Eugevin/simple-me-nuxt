@@ -94,6 +94,7 @@ onMounted(async () => {
     display: inline-block;
     position: relative;
     text-transform: uppercase;
+    font-family: sans-serif;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 
     span {
