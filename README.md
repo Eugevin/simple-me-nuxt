@@ -6,8 +6,14 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 Make sure to use bun in your setup (node is also work, but... node is... nevermind!)
 
+bun
 ```bash
 bun install
-
 bun dev
+```
+
+docker
+```bash
+docker build -t eugevin .
+docker run -d -p 3000:3000 --name eugevin eugevin
 ```
