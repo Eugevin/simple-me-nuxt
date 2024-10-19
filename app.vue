@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { type IDraftTarget } from './types'
 
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
-import Loader from './components/Loader.vue'
-
 useHead({
   title: 'Frontend Developer - Eugene Vinokurov',
   meta: [
@@ -59,6 +55,12 @@ const drafts: Array<IDraftTarget> = [
 ]
 
 const preloadComplete = ref<boolean>(false)
+const cookieAccepted = ref<boolean>(false)
+
+function acceptCookie() {
+  localStorage.setItem('cookie', 'true')
+  cookieAccepted.value = true
+}
 
 // SHARED DATA
 
@@ -76,6 +78,10 @@ watchEffect(() => {
     mainEl.value.style.overflowY = overflow.value ? 'auto' : 'hidden'
   }
 })
+
+onMounted(() => {
+  cookieAccepted.value = !!localStorage.getItem('cookie')
+})
 </script>
 
 <template>
@@ -83,6 +89,12 @@ watchEffect(() => {
     <Loader
       v-if="!preloadComplete"
       @loaded="preloadComplete = true"
+    />
+  </Transition>
+  <Transition>
+    <Cookie
+      v-if="!cookieAccepted && preloadComplete"
+      @accepted="acceptCookie"
     />
   </Transition>
   <main

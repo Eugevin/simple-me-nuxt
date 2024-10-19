@@ -14,6 +14,5 @@ bun dev
 
 docker
 ```bash
-docker build -t eugevin .
-docker run -d -p 3000:3000 --name eugevin eugevin
+docker compose up -d
 ```
